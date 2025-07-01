@@ -201,7 +201,7 @@ const PrakritiLanding = () => {
     </p>
    <a
   href="tel:8007337788"
-  className="text-sm md:text-base cursor-pointer font-bold bg-green-900 text-white px-6 py-3 rounded-full inline-block shadow-lg"
+  className="text-sm md:text-base cursor-pointer font-bold bg-green-900 hover:bg-green-700 text-white px-6 py-3 rounded-full inline-block shadow-lg"
 >
   +91 8007337788 &nbsp; | &nbsp; Mau - Kanhe Phata
 </a>
@@ -360,7 +360,7 @@ const PrakritiLanding = () => {
       </section>
       <SimpleFAQ/>
       <section id='contact' >
-      <ContactSection/>
+      
       </section>
       
    

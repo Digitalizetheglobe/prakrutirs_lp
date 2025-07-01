@@ -1,12 +1,20 @@
 import { useState } from 'react';
-import { CheckCircle } from 'lucide-react'; // or any icon library
+import { CheckCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import logo from '../assets/1_Black.png'; // update path to your logo
 
 export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [formSuccess, setFormSuccess] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
+  const [formError, setFormError] = useState('');
   const [form, setForm] = useState({ name: '', number: '', email: '', message: '' });
+
+  // EmailJS configuration
+  const SERVICE_ID = 'service_l18pesp';
+  const TEMPLATE_ID = 'template_1x60rej';
+  const PUBLIC_KEY = 'ULMmSrJw2FHbZzzrd';
 
   // Helper to allow only digits in number input
   const handleNumberChange = (e) => {
@@ -19,6 +27,50 @@ export default function Navbar() {
 
   // Helper to check if email contains "gmail.com"
   const isEmailValid = form.email.toLowerCase().includes('gmail.com');
+
+  // Handle form submission with EmailJS
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (!isNumberValid || !isEmailValid) return;
+
+    setFormLoading(true);
+    setFormError('');
+
+    try {
+      // Prepare template parameters
+      const templateParams = {
+        from_name: form.name,
+        from_email: form.email,
+        phone_number: form.number,
+        message: form.message,
+        to_name: 'Prakriti Team', // You can customize this
+      };
+
+      // Send email using EmailJS
+      await emailjs.send(
+        SERVICE_ID,
+        TEMPLATE_ID,
+        templateParams,
+        PUBLIC_KEY
+      );
+
+      setFormSuccess(true);
+      
+      // Reset form after success
+      setTimeout(() => {
+        setIsModalOpen(false);
+        setFormSuccess(false);
+        setFormLoading(false);
+        setForm({ name: '', number: '', email: '', message: '' });
+      }, 2000);
+
+    } catch (error) {
+      console.error('EmailJS Error:', error);
+      setFormError('Failed to send enquiry. Please try again or call us directly.');
+      setFormLoading(false);
+    }
+  };
 
   return (
     <>
@@ -45,7 +97,7 @@ export default function Navbar() {
 
           {/* Enquire Button (Always Visible) */}
           <a
-            className="text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base"
+            className="text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
             style={{ backgroundColor: '#004d1f' }}
             onClick={() => setIsModalOpen(true)}
             role="button"
@@ -82,11 +134,17 @@ export default function Navbar() {
           <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn">
             <button
               className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
-              onClick={() => setIsModalOpen(false)}
+              onClick={() => {
+                setIsModalOpen(false);
+                setFormError('');
+                setFormSuccess(false);
+              }}
               aria-label="Close"
+              disabled={formLoading}
             >
               &times;
             </button>
+            
             {formSuccess ? (
               <div className="flex flex-col items-center justify-center py-12">
                 <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
@@ -94,20 +152,15 @@ export default function Navbar() {
                 <p className="text-gray-600 text-center">Thank you for your interest. We'll get in touch soon.</p>
               </div>
             ) : (
-              <form
-                className="space-y-6"
-                onSubmit={e => {
-                  e.preventDefault();
-                  if (!isNumberValid || !isEmailValid) return;
-                  setFormSuccess(true);
-                  setTimeout(() => {
-                    setIsModalOpen(false);
-                    setFormSuccess(false);
-                    setForm({ name: '', number: '', email: '', message: '' });
-                  }, 1800);
-                }}
-              >
+              <form className="space-y-6" onSubmit={handleSubmit}>
                 <h3 className="text-2xl font-bold mb-4 text-green-700">Enquire Now</h3>
+                
+                {formError && (
+                  <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
+                    {formError}
+                  </div>
+                )}
+
                 <div>
                   <label className="block text-gray-700 font-semibold mb-1">Name</label>
                   <input
@@ -116,8 +169,10 @@ export default function Navbar() {
                     value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                     required
+                    disabled={formLoading}
                   />
                 </div>
+                
                 <div>
                   <label className="block text-gray-700 font-semibold mb-1">Number</label>
                   <input
@@ -128,11 +183,13 @@ export default function Navbar() {
                     value={form.number}
                     onChange={handleNumberChange}
                     required
+                    disabled={formLoading}
                   />
                   {!isNumberValid && form.number.length > 0 && (
                     <p className="text-red-500 text-xs mt-1">Please enter a valid 10-digit number.</p>
                   )}
                 </div>
+                
                 <div>
                   <label className="block text-gray-700 font-semibold mb-1">Email</label>
                   <input
@@ -141,11 +198,13 @@ export default function Navbar() {
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                     required
+                    disabled={formLoading}
                   />
                   {!isEmailValid && form.email.length > 0 && (
                     <p className="text-red-500 text-xs mt-1">Email must contain "gmail.com".</p>
                   )}
                 </div>
+                
                 <div>
                   <label className="block text-gray-700 font-semibold mb-1">Message</label>
                   <textarea
@@ -154,14 +213,16 @@ export default function Navbar() {
                     value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                     required
+                    disabled={formLoading}
                   />
                 </div>
+                
                 <button
                   type="submit"
-                  className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all"
-                  disabled={!isNumberValid || !isEmailValid}
+                  className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                  disabled={!isNumberValid || !isEmailValid || formLoading}
                 >
-                  Submit
+                  {formLoading ? 'Sending...' : 'Submit'}
                 </button>
               </form>
             )}
@@ -170,4 +231,4 @@ export default function Navbar() {
       )}
     </>
   );
-} 
+}
