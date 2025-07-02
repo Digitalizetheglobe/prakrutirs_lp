@@ -95,9 +95,9 @@ export default function Navbar() {
             <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
           </div>
 
-          {/* Enquire Button (Always Visible) */}
+          {/* Enquire Button (Hidden on Mobile) */}
           <a
-            className="text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
+            className="hidden md:inline-block text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
             style={{ backgroundColor: '#004d1f' }}
             onClick={() => setIsModalOpen(true)}
             role="button"
@@ -124,7 +124,17 @@ export default function Navbar() {
             <a href="#gallery" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a>
             <a href="#location" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Location</a>
             <a href="#contact" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
+             <a
+            className="text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
+            style={{ backgroundColor: '#004d1f' }}
+            onClick={() => setIsModalOpen(true)}
+            role="button"
+            tabIndex={0}
+          >
+            Enquire Now!
+          </a>
           </div>
+          
         )}
       </nav>
 
