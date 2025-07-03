@@ -171,7 +171,7 @@ const ContactSection = () => {
                       Builder
                     </h3>
                     <div className="text-gray-300 group-hover:text-white transition-colors">
-                      <div className="font-medium">Chirag Khandage</div>
+                      <div className="font-medium">Chirag Khandge, Parag Dhore, Sunil Kashid, Vijay Bajare</div>
                       <div className="text-sm text-gray-400 mt-1">Strategic Partner: Rising Spaces</div>
                     </div>
                   </div>

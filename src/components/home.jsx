@@ -61,17 +61,17 @@ const PrakritiLanding = () => {
     {
       icon: <Home size={16} />,
       label: "Plot Sizes",
-      value: "1200-2400 sq ft"
+      value: "861-2275 sq ft"
     },
     {
       icon: <MapPin size={16} />,
       label: "Total Plots",
-      value: "150+"
+      value: "81+"
     },
     {
       icon: <Car size={16} />,
       label: "Road Width",
-      value: "20-30 ft"
+      value: "9 ft"
     },
     {
       icon: <Clock size={16} />,
@@ -81,12 +81,12 @@ const PrakritiLanding = () => {
     {
       icon: <Trees size={16} />,
       label: "Green Cover",
-      value: "60%+"
+      value: "100%"
     },
     {
       icon: <Droplets size={16} />,
       label: "Water Supply",
-      value: "Borewell"
+      value: "Yes"
     }
   ];
 
@@ -161,10 +161,10 @@ const PrakritiLanding = () => {
   {/* Top-right Content */}
  
 
-<div className="flex flex-col md:flex-row items-center justify-start gap-8  px-4 md:px-[100px] pt-24 md:pt-40 z-50">
+<div className="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-8 px-4 md:px-[100px] pt-24 md:pt-40 z-50">
 
   {/* Left Block - Welcome */}
-  <div className="text-center md:text-left space-y-6">
+  <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-6">
     <h2 className="text-4xl md:text-6xl font-bold drop-shadow-lg text-white leading-tight">
       Welcome to <br /><span className="text-green-300">PRAKRITI</span>
     </h2>
@@ -186,26 +186,25 @@ const PrakritiLanding = () => {
   </div>
 
   {/* Divider */}
-  <div className="hidden md:block h-[250px] w-[2px] bg-white/40 rounded-full"></div>
+  <div className="hidden md:flex items-center">
+    <div className="h-[250px] w-[2px] bg-white/40 rounded-full"></div>
+  </div>
   <div className="block md:hidden w-full h-[2px] bg-white/40 my-8 rounded-full"></div>
 
   {/* Right Block - Plot Info */}
-  <div className="text-center md:text-left space-y-4">
-    <h2 className="text-4xl md:text-5xl font-extrabold drop-shadow-lg text-white leading-snug">
-      1 NA plot.<br />
-      Nayi kahani.<br />
-      Naya safar!
-    </h2>
-    <p className="text-base md:text-2xl font-semibold text-green-200 drop-shadow-md">
-      Apna plot, apna peace — <span className="italic font-bold">Launching Soon!</span>
+  <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-4">
+    <p className="text-base md:text-2xl font-semibold text-white drop-shadow-md">
+      This monsoon, grab the coolest pre-launch deal 
     </p>
-   <a
-  href="tel:8007337788"
-  className="text-sm md:text-base cursor-pointer font-bold bg-green-900 hover:bg-green-700 text-white px-6 py-3 rounded-full inline-block shadow-lg"
->
-  +91 8007337788 &nbsp; | &nbsp; Mau - Kanhe Phata
-</a>
-
+    <h2 className="text-4xl md:text-5xl font-extrabold drop-shadow-lg text-green-200 leading-snug">
+      Just ₹50K token and your plot is <span className="italic font-bold">RESERVED!</span> 
+    </h2>
+    <a
+      href="tel:8007337788"
+      className="text-sm md:text-base cursor-pointer font-bold bg-green-900 hover:bg-green-700 text-white px-6 py-3 rounded-full inline-block shadow-lg"
+    >
+      +91 8007337788 &nbsp; | &nbsp; Mau - Kanhe Phata
+    </a>
   </div>
 
 </div>
@@ -398,7 +397,7 @@ const PrakritiLanding = () => {
           <div>
             <h3 className="text-lg font-semibold mb-4">Project Info</h3>
             <ul className="space-y-2 text-gray-400">
-              <li>Builder: Chirag Khandage</li>
+              <li>Builder: Chirag Khandge, Parag Dhore, Sunil Kashid, Vijay Bajare</li>
               <li>Partner: Rising Spaces</li>
               <li>Authority: PMRDA</li>
               <li>Total Area: 5 Acres</li>

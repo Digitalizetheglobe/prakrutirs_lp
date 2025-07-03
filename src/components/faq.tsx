@@ -7,36 +7,20 @@ const SimpleFAQ = () => {
    const [isVisible, setIsVisible] = useState({ location: false });
   const faqs = [
     {
-      q: "What is the best time to visit Prakriti?",
-      a: "The best time to visit is during monsoon season (June-September) for waterfalls and post-monsoon (October-February) for pleasant weather."
+      q: "Why should I choose Prakriti ?",
+      a: "Because Prakriti is where nature meets peace. It’s not just a plot—it’s your personal retreat, surrounded by greenery, calm, and purpose."
     },
     {
       q: "How do I reach Prakriti Nature Camp?",
-      a: "We're located 45km from the nearest railway station. We provide pickup services and detailed directions upon booking."
+      a: "Yes, Prakriti is approved by leading banks, making loans easily accessible. So you can secure your slice of nature without financial stress."
     },
     {
-      q: "What activities are included?",
-      a: "Our packages include nature walks, waterfall rappelling, rock climbing, bird watching, photography sessions, and campfire evenings."
+      q: "Will I get basic amenities in such a nature-centric location?",
+      a: "Absolutely. While you stay close to nature, you won’t compromise on convenience."
     },
     {
-      q: "What should I pack?",
-      a: "Pack comfortable trekking shoes, quick-dry clothing, rain gear, sunscreen, and personal medications. We provide camping equipment and meals."
-    },
-    {
-      q: "Are there accommodation options?",
-      a: "Yes! We offer eco-friendly cottages, traditional tents, and luxury glamping with organic meals and basic amenities."
-    },
-    {
-      q: "Is it safe for children and elderly?",
-      a: "Absolutely! We have age-appropriate activities and easy trails with experienced guides ensuring safety at all times."
-    },
-    {
-      q: "What is your cancellation policy?",
-      a: "Full refund if cancelled 7 days before, 50% refund for 3-7 days prior, no refund for same-day cancellations."
-    },
-    {
-      q: "Do you provide vegetarian meals?",
-      a: "Yes! We specialize in organic, locally-sourced vegetarian cuisine. Vegan and special dietary requirements can be accommodated."
+      q: "What’s the natural vibe around Prakriti?",
+      a: "Green views, fresh air, peaceful vibes. Prakriti is all about quiet mornings and starry nights—perfect for a calm and relaxed lifestyle."
     }
   ];
 

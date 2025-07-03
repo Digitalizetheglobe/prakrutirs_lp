@@ -55,9 +55,9 @@ const EnhancedLocation = () => {
 
   const nearbyPlaces = [
     { name: "Takve Village", distance: "2 km", time: "5 min", type: "village" },
-    { name: "Main Highway", distance: "5 km", time: "10 min", type: "road" },
-    { name: "Pune City", distance: "45 km", time: "1 hr", type: "city" },
-    { name: "Airport", distance: "50 km", time: "1.2 hr", type: "airport" }
+    { name: "Pune-Mumbai Highway", distance: "3 km", time: "7 min", type: "road" },
+    { name: "Takve MIDC", distance: "4 km", time: "8 min", type: "industrial" },
+    { name: "Jagtap Waterfall", distance: "6 km", time: "12 min", type: "nature" }
   ];
 
   return (

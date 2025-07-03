@@ -19,13 +19,13 @@ import {
 export default function AmenitiesSection() {
   // Sample amenities data - replace with your actual data
   const amenities = [
-    { icon: Wifi, title: "High-Speed Internet", desc: "Fiber optic connectivity for modern living", color: "from-blue-500 to-cyan-500", accent: "blue" },
+    { icon: Wifi, title: "High-Speed Internet", desc: "No", color: "from-blue-500 to-cyan-500", accent: "blue" },
     { icon: Shield, title: "24/7 Security", desc: "Round-the-clock protection for peace of mind", color: "from-red-500 to-pink-500", accent: "red" },
     { icon: Car, title: "Parking Space", desc: "Dedicated parking for every property", color: "from-purple-500 to-indigo-500", accent: "purple" },
     { icon: Trees, title: "Green Spaces", desc: "Landscaped gardens and recreational areas", color: "from-green-500 to-emerald-500", accent: "green" },
     { icon: Droplets, title: "Water Supply", desc: "Uninterrupted water connection", color: "from-cyan-500 to-blue-500", accent: "cyan" },
-    { icon: Zap, title: "Power Backup", desc: "Generator backup for essential services", color: "from-yellow-500 to-orange-500", accent: "yellow" },
-    { icon: Camera, title: "CCTV Surveillance", desc: "Advanced monitoring systems", color: "from-indigo-500 to-purple-500", accent: "indigo" },
+    { icon: Zap, title: "Power Backup", desc: "No", color: "from-yellow-500 to-orange-500", accent: "yellow" },
+    { icon: Camera, title: "CCTV Surveillance", desc: "No", color: "from-indigo-500 to-purple-500", accent: "indigo" },
     { icon: MapPin, title: "Prime Location", desc: "Strategic location with easy accessibility", color: "from-pink-500 to-red-500", accent: "pink" }
   ];
 
