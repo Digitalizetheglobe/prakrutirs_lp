@@ -426,6 +426,24 @@ const PrakritiLanding = () => {
             <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
           <p>&copy; 2025 Prakriti. All rights reserved. | Crafted with care by 
                     <a 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                         href="https://digitalizetheglobe.com/" 
                         className="text-[#d84a48] hover:text-white transition ml-1"
                         target="_blank"
