@@ -47,7 +47,7 @@ export default function PricingSection() {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">Per Sqft Rate</h3>
                 <div className="mb-6">
-                  <span className="text-5xl font-black text-green-300 drop-shadow-lg">₹1,199</span>
+                  <span className="text-5xl font-black text-green-300 drop-shadow-lg">₹1,499</span>
                   <div className="text-gray-200 mt-2">per square foot</div>
                 </div>
                 <div className="h-1 bg-green-500 rounded-full"></div>
@@ -70,7 +70,7 @@ export default function PricingSection() {
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">Starting Budget</h3>
                 <div className="mb-6">
-                  <span className="text-5xl font-black text-emerald-300 drop-shadow-lg">14.50</span>
+                  <span className="text-5xl font-black text-emerald-300 drop-shadow-lg">15.38</span>
                   <div className="text-gray-200 mt-2">Lacs onwards</div>
                 </div>
                 <div className="h-1 bg-emerald-500 rounded-full"></div>
