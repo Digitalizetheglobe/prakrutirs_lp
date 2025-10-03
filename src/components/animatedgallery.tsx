@@ -1,28 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import { Play, Heart, Share2, Eye, ZoomIn, Star, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ZoomIn, ChevronLeft, ChevronRight, X } from 'lucide-react';
 // @ts-ignore
 import mistyForest from "../assets/img2.jpg";
+// @ts-ignore
 import mountainPeak from "../assets/img3.jpg";
+// @ts-ignore
 import oceanWaves from "../assets/img4.jpg";
+// @ts-ignore
 import forestPath from "../assets/img5.jpg";
+// @ts-ignore
 import sunsetLake from "../assets/img1.png";
+// @ts-ignore
 import valleyView from "../assets/img.png";
+// @ts-ignore
 import valleyView1 from "../assets/img6.jpg";
+// @ts-ignore
+import view1 from "../assets/01.png";
+// @ts-ignore
+import view2 from "../assets/02.png";
+// @ts-ignore
+import view3 from "../assets/06.png";
+// @ts-ignore
+import view4 from "../assets/04.png";
+// @ts-ignore
+import view5 from "../assets/05.png";
+
 
  
 
-// Adjust the path as necessary
 const AnimatedGallery = () => {
   const [isVisible, setIsVisible] = useState({ gallery: false });
   const [hoveredIndex, setHoveredIndex] = useState(null);
-  const [likedImages, setLikedImages] = useState(new Set());
-  const [currentSlide, setCurrentSlide] = useState(0);
   const [modalOpen, setModalOpen] = useState(false);
   const [modalImageIndex, setModalImageIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
-  // Gallery images - first 4 will be displayed as main grid
+  // Gallery images - all images in a single grid
   const galleryImages = [
     { 
       url: mistyForest,
@@ -62,18 +76,43 @@ const AnimatedGallery = () => {
     },
     { 
       url: valleyView1,
-      title: "Valley View",
+      title: "Valley View 2",
+      category: "Vista",
+      views: "1.9k"
+    },
+    { 
+      url: view1,
+      title: "Scenic View 1",
+      category: "Vista",
+      views: "1.9k"
+    },
+    { 
+      url: view2,
+      title: "Scenic View 2",
+      category: "Vista",
+      views: "1.9k"
+    },
+    { 
+      url: view3,
+      title: "Scenic View 3",
+      category: "Vista",
+      views: "1.9k"
+    },
+    { 
+      url: view4,
+      title: "Scenic View 4",
+      category: "Vista",
+      views: "1.9k"
+    },
+    { 
+      url: view5,
+      title: "Scenic View 5",
       category: "Vista",
       views: "1.9k"
     },
   ];
 
-  const mainImages = galleryImages.slice(0, 4);
-  const sliderImages = galleryImages.slice(4);
-  const itemsPerSlide = 3;
-  const totalSlides = Math.ceil(sliderImages.length / itemsPerSlide);
-
-  // Minimum swipe distance
+  // Minimum swipe distance for modal navigation
   const minSwipeDistance = 50;
 
   useEffect(() => {
@@ -103,9 +142,6 @@ const AnimatedGallery = () => {
     if (modalOpen) {
       if (isLeftSwipe) nextModalImage();
       if (isRightSwipe) prevModalImage();
-    } else {
-      if (isLeftSwipe) nextSlide();
-      if (isRightSwipe) prevSlide();
     }
   };
 
@@ -143,34 +179,17 @@ const AnimatedGallery = () => {
     return () => window.removeEventListener('keydown', handleKeyPress);
   }, [modalOpen]);
 
-  const toggleLike = (index) => {
-    const newLiked = new Set(likedImages);
-    if (newLiked.has(index)) {
-      newLiked.delete(index);
-    } else {
-      newLiked.add(index);
-    }
-    setLikedImages(newLiked);
-  };
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % totalSlides);
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + totalSlides) % totalSlides);
-  };
-
-  const renderImageCard = (image, index, isSlider = false) => (
+  const renderImageCard = (image, index) => (
     <div 
       key={index} 
       className={`group relative overflow-hidden rounded-xl sm:rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-1 sm:hover:-translate-y-2 cursor-pointer ${
         isVisible.gallery ? 'animate-fade-in-up' : 'opacity-0'
-      } ${isSlider ? 'flex-shrink-0' : ''}`}
+      }`}
       style={{ animationDelay: `${index * 0.1}s` }}
-      onMouseEnter={() => setHoveredIndex(isSlider ? `slider-${index}` : index)}
+      onMouseEnter={() => setHoveredIndex(index)}
       onMouseLeave={() => setHoveredIndex(null)}
-      onClick={() => openModal(isSlider ? index + 4 : index)}
+      onClick={() => openModal(index)}
     >
       <div className="relative overflow-hidden">
         <img 
@@ -189,7 +208,7 @@ const AnimatedGallery = () => {
         </div>
 
         <div className={`absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/20 to-transparent transition-transform duration-1000 ${
-          hoveredIndex === (isSlider ? `slider-${index}` : index) ? 'translate-x-full' : ''
+          hoveredIndex === index ? 'translate-x-full' : ''
         }`}></div>
 
         <div className="absolute inset-0 rounded-xl sm:rounded-2xl border-2 border-transparent group-hover:border-green-400/50 transition-all duration-500"></div>
@@ -230,72 +249,10 @@ const AnimatedGallery = () => {
             </div>
           </div>
 
-          {/* Main Featured Gallery - 4 Images */}
-          <div className="mb-8 sm:mb-10">
-            <h3 className="text-2xl sm:text-3xl font-bold text-center mb-8 sm:mb-12 text-gray-800">Featured Collection</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
-              {mainImages.map((image, index) => renderImageCard(image, index))}
-            </div>
-          </div>
-
-          {/* More Adventures Slider */}
+          {/* Single Gallery Grid */}
           <div className="mb-12 sm:mb-16">
-            <div className="flex items-center justify-between mb-6 sm:mb-8">
-              <h3 className="text-2xl sm:text-3xl font-bold text-gray-800">More Adventures</h3>
-              <div className="flex space-x-2">
-                <button 
-                  onClick={prevSlide}
-                  className="p-2 sm:p-3 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:bg-green-50 group"
-                >
-                  <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 group-hover:text-green-600" />
-                </button>
-                <button 
-                  onClick={nextSlide}
-                  className="p-2 sm:p-3 rounded-full bg-white shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:bg-green-50 group"
-                >
-                  <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 text-gray-600 group-hover:text-green-600" />
-                </button>
-              </div>
-            </div>
-
-            {/* Slider Container with Touch Support */}
-            <div 
-              className="relative overflow-hidden rounded-2xl sm:rounded-3xl"
-              onTouchStart={onTouchStart}
-              onTouchMove={onTouchMove}
-              onTouchEnd={onTouchEnd}
-            >
-              <div 
-                className="flex transition-transform duration-500 ease-in-out gap-4 sm:gap-6"
-                style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-              >
-                {Array.from({ length: totalSlides }).map((_, slideIndex) => (
-                  <div key={slideIndex} className="min-w-full flex gap-4 sm:gap-6">
-                    {sliderImages
-                      .slice(slideIndex * itemsPerSlide, (slideIndex + 1) * itemsPerSlide)
-                      .map((image, imageIndex) => (
-                        <div key={imageIndex} className="flex-1">
-                          {renderImageCard(image, slideIndex * itemsPerSlide + imageIndex, true)}
-                        </div>
-                      ))}
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Slider Indicators */}
-            <div className="flex justify-center mt-6 sm:mt-8 space-x-2">
-              {Array.from({ length: totalSlides }).map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentSlide(index)}
-                  className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
-                    currentSlide === index 
-                      ? 'bg-green-500 scale-125' 
-                      : 'bg-gray-300 hover:bg-gray-400'
-                  }`}
-                />
-              ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8">
+              {galleryImages.map((image, index) => renderImageCard(image, index))}
             </div>
           </div>
         </div>
