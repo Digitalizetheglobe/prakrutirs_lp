@@ -5,6 +5,7 @@ import AmenitiesSection from './amenitiessection';
 import AnimatedGallery from './animatedgallery';
 import EnhancedLocation from './location';
 import SimpleFAQ from './faq';
+import bg from '../assets/01.png';
 import ContactSection from './contactsection';
 import logo from '../assets/1_Black.png'; // Update the path if your logo is different
 import logof from '../assets/1_White.png'; // Update the path if your logo is different
@@ -149,7 +150,7 @@ const PrakritiLanding = () => {
   {/* Static Background Image */}
   <div className="absolute inset-0 z-0">
     <img 
-      src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=1200&h=800&fit=crop" 
+      src={bg} 
       alt="Prakriti" 
       className="w-full h-full object-cover" 
     />
@@ -193,11 +194,12 @@ const PrakritiLanding = () => {
 
   {/* Right Block - Plot Info */}
   <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-4">
-    <p className="text-base md:text-2xl font-semibold text-white drop-shadow-md">
+    {/* <p className="text-base md:text-2xl font-semibold text-white drop-shadow-md">
       This monsoon, grab the coolest pre-launch deal 
-    </p>
-    <h2 className="text-4xl md:text-5xl font-extrabold drop-shadow-lg text-green-200 leading-snug">
-      Just ₹50K token and your plot is <span className="italic font-bold">RESERVED!</span> 
+    </p> */}
+    <h2 className="text-xl md:text-3xl font-extrabold drop-shadow-lg text-green-200 leading-snug">
+      {/* Just ₹50K token and your plot is <span className="italic font-bold">RESERVED!</span>  */}
+    Reconnect with yourself and your loved ones in a community built around <span className="italic font-bold text-white">harmony, greenery, and endless open space.</span>
     </h2>
     <a
       href="tel:8007337788"
