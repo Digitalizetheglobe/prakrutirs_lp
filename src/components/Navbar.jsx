@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { CheckCircle } from 'lucide-react';
-import emailjs from '@emailjs/browser';
 import logo from '../assets/1_Black.png'; // update path to your logo
 
 export default function Navbar() {
@@ -10,11 +9,6 @@ export default function Navbar() {
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState('');
   const [form, setForm] = useState({ name: '', number: '', email: '', message: '' });
-
-  // EmailJS configuration
-  const SERVICE_ID = 'service_l18pesp';
-  const TEMPLATE_ID = 'template_1x60rej';
-  const PUBLIC_KEY = 'ULMmSrJw2FHbZzzrd';
 
   // Helper to allow only digits in number input
   const handleNumberChange = (e) => {
@@ -28,7 +22,7 @@ export default function Navbar() {
   // Helper to check if email contains "gmail.com"
   const isEmailValid = form.email.toLowerCase().includes('gmail.com');
 
-  // Handle form submission with EmailJS
+  // Handle form submission with API
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -38,22 +32,31 @@ export default function Navbar() {
     setFormError('');
 
     try {
-      // Prepare template parameters
-      const templateParams = {
-        from_name: form.name,
-        from_email: form.email,
-        phone_number: form.number,
-        message: form.message,
-        to_name: 'Prakriti Team', // You can customize this
+      // Prepare form data for API with data wrapper
+      const requestBody = {
+        data: {
+          name: form.name,
+          email: form.email,
+          number: form.number,
+          messege: form.message, // API expects "messege" instead of "message"
+        },
       };
 
-      // Send email using EmailJS
-      await emailjs.send(
-        SERVICE_ID,
-        TEMPLATE_ID,
-        templateParams,
-        PUBLIC_KEY
-      );
+      // Send form data to API
+      const response = await fetch('https://api.risingspaces.in/api/forms/forms/691ad13ec476888712e4c06d/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      console.log('Form submitted successfully:', result);
 
       setFormSuccess(true);
       
@@ -66,7 +69,7 @@ export default function Navbar() {
       }, 2000);
 
     } catch (error) {
-      console.error('EmailJS Error:', error);
+      console.error('Form Submission Error:', error);
       setFormError('Failed to send enquiry. Please try again or call us directly.');
       setFormLoading(false);
     }
