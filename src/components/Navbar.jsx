@@ -233,17 +233,35 @@ export default function Navbar() {
                   />
                 </div>
                 
-                <div className="flex items-center">
+                <div className="flex items-start">
                   <input
                     type="checkbox"
-                    id="robotCheck"
-                    checked={isRobotChecked}
-                    onChange={e => setIsRobotChecked(e.target.checked)}
-                    disabled={formLoading}
-                    className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500 cursor-pointer"
+                    id="consent-checkbox"
+                    checked={isConsentChecked}
+                    onChange={e => setIsConsentChecked(e.target.checked)}
+                    className="mt-1 mr-2 w-4 h-4 text-[#00274d] border-gray-300 rounded focus:ring-2 focus:ring-green-400"
+                    required
                   />
-                  <label htmlFor="robotCheck" className="ml-2 text-sm text-gray-700 cursor-pointer">
-                    I'm not a robot
+                  <label htmlFor="consent-checkbox" className="text-sm text-gray-700">
+                    Yes, I consent to the{' '}
+                    <a 
+                      href="https://risingspaces.in/privacy-policy" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-[#00274d] hover:text-[#00444d] underline"
+                    >
+                      Privacy Policy
+                    </a>
+                    {' '}and{' '}
+                    <a 
+                      href="https://risingspaces.in/terms-conditions" 
+                      target="_blank" 
+                      rel="noopener noreferrer"
+                      className="text-[#00274d] hover:text-[#00444d] underline"
+                    >
+                      Terms and Conditions
+                    </a>
+                    .
                   </label>
                 </div>
                 
