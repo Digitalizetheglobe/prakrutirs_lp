@@ -9,6 +9,7 @@ export default function Navbar() {
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState('');
   const [form, setForm] = useState({ name: '', number: '', email: '', message: '' });
+  const [isRobotChecked, setIsRobotChecked] = useState(false);
 
   // Helper to allow only digits in number input
   const handleNumberChange = (e) => {
@@ -66,6 +67,7 @@ export default function Navbar() {
         setFormSuccess(false);
         setFormLoading(false);
         setForm({ name: '', number: '', email: '', message: '' });
+        setIsRobotChecked(false);
       }, 2000);
 
     } catch (error) {
@@ -151,6 +153,7 @@ export default function Navbar() {
                 setIsModalOpen(false);
                 setFormError('');
                 setFormSuccess(false);
+                setIsRobotChecked(false);
               }}
               aria-label="Close"
               disabled={formLoading}
@@ -230,10 +233,24 @@ export default function Navbar() {
                   />
                 </div>
                 
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="robotCheck"
+                    checked={isRobotChecked}
+                    onChange={e => setIsRobotChecked(e.target.checked)}
+                    disabled={formLoading}
+                    className="w-4 h-4 text-green-600 border-gray-300 rounded focus:ring-green-500 cursor-pointer"
+                  />
+                  <label htmlFor="robotCheck" className="ml-2 text-sm text-gray-700 cursor-pointer">
+                    I'm not a robot
+                  </label>
+                </div>
+                
                 <button
                   type="submit"
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!isNumberValid || !isEmailValid || formLoading}
+                  disabled={!isNumberValid || !isEmailValid || !isRobotChecked || formLoading}
                 >
                   {formLoading ? 'Sending...' : 'Submit'}
                 </button>
