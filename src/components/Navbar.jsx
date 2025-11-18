@@ -10,6 +10,7 @@ export default function Navbar() {
   const [formError, setFormError] = useState('');
   const [form, setForm] = useState({ name: '', number: '', email: '', message: '' });
   const [isRobotChecked, setIsRobotChecked] = useState(false);
+  const [isConsentChecked, setIsConsentChecked] = useState(false);
 
   // Helper to allow only digits in number input
   const handleNumberChange = (e) => {
@@ -68,6 +69,7 @@ export default function Navbar() {
         setFormLoading(false);
         setForm({ name: '', number: '', email: '', message: '' });
         setIsRobotChecked(false);
+        setIsConsentChecked(false);
       }, 2000);
 
     } catch (error) {
@@ -132,7 +134,10 @@ export default function Navbar() {
              <a
             className="text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
             style={{ backgroundColor: '#004d1f' }}
-            onClick={() => setIsModalOpen(true)}
+            onClick={() => {
+              setIsModalOpen(true);
+              setIsMobileMenuOpen(false);
+            }}
             role="button"
             tabIndex={0}
           >
@@ -145,7 +150,18 @@ export default function Navbar() {
 
       {/* MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black bg-opacity-50 px-4">
+        <div 
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black bg-opacity-50 px-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !formLoading) {
+              setIsModalOpen(false);
+              setFormError('');
+              setFormSuccess(false);
+              setIsRobotChecked(false);
+              setIsConsentChecked(false);
+            }
+          }}
+        >
           <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn">
             <button
               className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
@@ -154,6 +170,7 @@ export default function Navbar() {
                 setFormError('');
                 setFormSuccess(false);
                 setIsRobotChecked(false);
+                setIsConsentChecked(false);
               }}
               aria-label="Close"
               disabled={formLoading}
@@ -268,7 +285,7 @@ export default function Navbar() {
                 <button
                   type="submit"
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!isNumberValid || !isEmailValid || !isRobotChecked || formLoading}
+                  disabled={!isNumberValid || !isEmailValid || !isConsentChecked || formLoading}
                 >
                   {formLoading ? 'Sending...' : 'Submit'}
                 </button>

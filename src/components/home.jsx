@@ -22,6 +22,7 @@ const PrakritiLanding = () => {
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState('');
   const [isRobotChecked, setIsRobotChecked] = useState(false);
+  const [isConsentChecked, setIsConsentChecked] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -191,6 +192,7 @@ const PrakritiLanding = () => {
         setFormLoading(false);
         setForm({ name: '', number: '', email: '', message: '' });
         setIsRobotChecked(false);
+        setIsConsentChecked(false);
       }, 2000);
 
     } catch (error) {
@@ -544,7 +546,18 @@ const PrakritiLanding = () => {
 
       {/* MODAL */}
       {isModalOpen && (
-        <div className="fixed inset-0 z-[99999] flex items-center justify-center bg-black bg-opacity-50 px-4">
+        <div 
+          className="fixed inset-0 z-[99999] flex items-center justify-center bg-black bg-opacity-50 px-4"
+          onClick={(e) => {
+            if (e.target === e.currentTarget && !formLoading) {
+              setIsModalOpen(false);
+              setFormError('');
+              setFormSuccess(false);
+              setIsRobotChecked(false);
+              setIsConsentChecked(false);
+            }
+          }}
+        >
           <div className="bg-white rounded-2xl shadow-2xl p-8 w-full max-w-md relative animate-fadeIn">
             <button
               className="absolute top-3 right-3 text-gray-400 hover:text-gray-700 text-2xl font-bold"
@@ -553,6 +566,7 @@ const PrakritiLanding = () => {
                 setFormError('');
                 setFormSuccess(false);
                 setIsRobotChecked(false);
+                setIsConsentChecked(false);
               }}
               aria-label="Close"
               disabled={formLoading}
@@ -667,7 +681,7 @@ const PrakritiLanding = () => {
                 <button
                   type="submit"
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!isNumberValid || !isEmailValid || !isRobotChecked || formLoading}
+                  disabled={!isNumberValid || !isEmailValid || !isConsentChecked || formLoading}
                 >
                   {formLoading ? 'Sending...' : 'Submit'}
                 </button>
