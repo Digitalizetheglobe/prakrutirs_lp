@@ -1,14 +1,15 @@
-import { useState } from 'react'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import PrakritiLanding from './components/home.jsx'
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx'
 
 function App() {
-
-
   return (
-    <div>
-     <PrakritiLanding/> 
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/" element={<PrakritiLanding />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+      </Routes>
+    </Router>
   )
 }
 

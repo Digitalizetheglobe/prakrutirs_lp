@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { MapPin, Phone, Mail, TreePine, Shield, Droplets, Zap, Home, Car, Users, Star, ChevronDown, Play, CheckCircle, ArrowRight, Instagram, Facebook, Twitter, TrendingUp, Leaf, Award, Clock, Trees } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Phone, Mail, TreePine, Shield, Droplets, Zap, Home, Car, Users, Star, ChevronDown, ChevronUp, Play, CheckCircle, ArrowRight, Instagram, Facebook, Twitter, TrendingUp, Leaf, Award, Clock, Trees } from 'lucide-react';
 import PricingSection from './pricingsection';
 import AmenitiesSection from './amenitiessection';
 import AnimatedGallery from './animatedgallery';
@@ -10,6 +11,7 @@ import ContactSection from './contactsection';
 import logo from '../assets/1_Black.png'; // Update the path if your logo is different
 import logof from '../assets/1_White.png'; // Update the path if your logo is different
 import Navbar from './Navbar';
+import PrivacyConsentBanner from './PrivacyConsentBanner';
 
 const PrakritiLanding = () => {
   const [isVisible, setIsVisible] = useState({});
@@ -23,6 +25,7 @@ const PrakritiLanding = () => {
   const [formError, setFormError] = useState('');
   const [isRobotChecked, setIsRobotChecked] = useState(false);
   const [isConsentChecked, setIsConsentChecked] = useState(false);
+  const [showScrollButtons, setShowScrollButtons] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
@@ -34,6 +37,30 @@ const PrakritiLanding = () => {
     
     return () => clearInterval(interval);
   }, []);
+
+  // Scroll position tracking for scroll buttons
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Show buttons when scrolled down a bit
+      setShowScrollButtons(scrollPosition > 200);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  // Scroll functions
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const scrollToBottom = () => {
+    window.scrollTo({ top: document.documentElement.scrollHeight, behavior: 'smooth' });
+  };
 
   const features = [
     {
@@ -215,6 +242,9 @@ const PrakritiLanding = () => {
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <Navbar />
+      
+      {/* Privacy Consent Banner */}
+      <PrivacyConsentBanner />
 
       {/* Hero Section - Clean, No Background Animation */}
      <section id="hero" className="relative min-h-screen flex flex-col justify-between">
@@ -465,6 +495,7 @@ const PrakritiLanding = () => {
               <li><a href="#amenities" className="hover:text-white transition-colors">Amenities</a></li>
               <li><a href="#gallery" className="hover:text-white transition-colors">Gallery</a></li>
               <li><a href="#location" className="hover:text-white transition-colors">Location</a></li>
+              <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
           
@@ -498,7 +529,7 @@ const PrakritiLanding = () => {
             </div>
             
             <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 Prakriti. All rights reserved. | Crafted with care by 
+          <p>&copy; 2025 Prakriti. All rights reserved. | <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link> | Crafted with care by 
                     <a 
 
 
@@ -532,8 +563,31 @@ const PrakritiLanding = () => {
           </div>
         </footer>
 
-        {/* Floating Action Button */}
-      <div className="fixed bottom-6 right-6 z-50">
+        {/* Scroll Buttons and Call Button */}
+      <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
+        {/* Scroll to Top Button */}
+        {showScrollButtons && (
+          <button
+            onClick={scrollToTop}
+            className="flex items-center justify-center text-white w-12 h-12 rounded-full shadow-lg transform hover:scale-110 transition duration-300 bg-green-600 hover:bg-green-700"
+            aria-label="Scroll to Top"
+          >
+            <ChevronUp size={24} />
+          </button>
+        )}
+        
+        {/* Scroll to Bottom Button */}
+        {showScrollButtons && (
+          <button
+            onClick={scrollToBottom}
+            className="flex items-center justify-center text-white w-12 h-12 rounded-full shadow-lg transform hover:scale-110 transition duration-300 bg-green-600 hover:bg-green-700"
+            aria-label="Scroll to Bottom"
+          >
+            <ChevronDown size={24} />
+          </button>
+        )}
+        
+        {/* Call Button */}
         <a
           href="tel:8378966777"
           className="flex items-center justify-center text-white w-14 h-14 rounded-full shadow-lg transform hover:scale-110 transition duration-300"
@@ -657,14 +711,12 @@ const PrakritiLanding = () => {
                   />
                   <label htmlFor="consent-checkbox" className="text-sm text-gray-700">
                     Yes, I consent to the{' '}
-                    <a 
-                      href="https://risingspaces.in/privacy-policy" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
+                    <Link 
+                      to="/privacy-policy" 
                       className="text-[#00274d] hover:text-[#00444d] underline"
                     >
                       Privacy Policy
-                    </a>
+                    </Link>
                     {' '}and{' '}
                     <a 
                       href="https://risingspaces.in/terms-conditions" 

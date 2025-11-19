@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import logo from '../assets/1_Black.png'; // update path to your logo
 
@@ -100,6 +101,7 @@ export default function Navbar() {
             <a href="#gallery" className="text-gray-700 hover:text-green-600 transition-colors">Gallery</a>
             <a href="#location" className="text-gray-700 hover:text-green-600 transition-colors">Location</a>
             <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
+            <Link to="/privacy-policy" className="text-gray-700 hover:text-green-600 transition-colors">Privacy Policy</Link>
           </div>
 
           {/* Enquire Button (Hidden on Mobile) */}
@@ -131,6 +133,7 @@ export default function Navbar() {
             <a href="#gallery" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a>
             <a href="#location" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Location</a>
             <a href="#contact" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
+            <Link to="/privacy-policy" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Privacy Policy</Link>
              <a
             className="text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
             style={{ backgroundColor: '#004d1f' }}
@@ -261,14 +264,12 @@ export default function Navbar() {
                   />
                   <label htmlFor="consent-checkbox" className="text-sm text-gray-700">
                     Yes, I consent to the{' '}
-                    <a 
-                      href="https://risingspaces.in/privacy-policy" 
-                      target="_blank" 
-                      rel="noopener noreferrer"
+                    <Link 
+                      to="/privacy-policy" 
                       className="text-[#00274d] hover:text-[#00444d] underline"
                     >
                       Privacy Policy
-                    </a>
+                    </Link>
                     {' '}and{' '}
                     <a 
                       href="https://risingspaces.in/terms-conditions" 
