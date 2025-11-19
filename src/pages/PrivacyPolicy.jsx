@@ -1,10 +1,45 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Shield, Lock, Eye, FileText, Mail, Phone } from 'lucide-react';
 import Navbar from '../components/Navbar';
 import logo from '../assets/1_Black.png';
 
 const PrivacyPolicy = () => {
+  useEffect(() => {
+    // Add or update robots meta tag for privacy policy page
+    let robotsMeta = document.querySelector('meta[name="robots"]');
+    if (robotsMeta) {
+      robotsMeta.setAttribute('content', 'noindex, nofollow');
+    } else {
+      robotsMeta = document.createElement('meta');
+      robotsMeta.setAttribute('name', 'robots');
+      robotsMeta.setAttribute('content', 'noindex, nofollow');
+      document.head.appendChild(robotsMeta);
+    }
+
+    // Update canonical URL for privacy policy page
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (canonicalLink) {
+      canonicalLink.setAttribute('href', 'https://codenameprakriti.com/privacy-policy');
+    } else {
+      canonicalLink = document.createElement('link');
+      canonicalLink.setAttribute('rel', 'canonical');
+      canonicalLink.setAttribute('href', 'https://codenameprakriti.com/privacy-policy');
+      document.head.appendChild(canonicalLink);
+    }
+
+    // Cleanup: restore default robots tag and canonical URL when component unmounts
+    return () => {
+      const metaTag = document.querySelector('meta[name="robots"]');
+      if (metaTag) {
+        metaTag.setAttribute('content', 'index, follow');
+      }
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) {
+        canonical.setAttribute('href', 'https://codenameprakriti.com');
+      }
+    };
+  }, []);
   return (
     <div className="min-h-screen bg-gray-50">
       <Navbar />
