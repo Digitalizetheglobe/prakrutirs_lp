@@ -256,7 +256,7 @@ const EnhancedLocation = () => {
                       <p className="text-gray-600 mb-4 text-lg">Ready to visit? Call us for site visit arrangement</p>
                       <div className="space-y-3">
                         <a 
-                          href="tel:+918007337788" 
+                          href="tel:+918007337766" 
                           className="inline-flex items-center space-x-3 bg-gradient-to-r from-green-600 to-blue-600 text-white px-8 py-4 rounded-full font-bold text-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 group"
                         >
                           <Phone className="w-5 h-5 animate-pulse" />

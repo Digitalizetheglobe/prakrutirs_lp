@@ -37,8 +37,8 @@ const ContactSection = () => {
     {
       icon: Phone,
       title: "Call Now",
-      content: "+91 800 733 7788",
-      link: "tel:+918007337788",
+      content: "+91 800 733 7766",
+      link: "tel:+918007337766",
       accent: "from-emerald-400 to-cyan-400"
     },
     {
@@ -102,7 +102,7 @@ const ContactSection = () => {
     onMouseLeave={() => setHoveredCard(null)}
   >
               <a
-  href="tel:+918007337788"
+  href="tel:+918007337766"
   className="flex items-start gap-4 group"
   style={{ cursor: 'pointer' }}
 >
@@ -115,7 +115,7 @@ const ContactSection = () => {
       Call Now
     </h3>
     <span className="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
-      +91 800 733 7788
+      +91 800 733 7766
     </span>
   </div>
 </a>

@@ -182,13 +182,13 @@ export default function Navbar() {
             </button>
             
             {formSuccess ? (
-              <div className="flex flex-col items-center justify-center py-12">
+              <div className="flex flex-col items-center justify-center pt-8 pb-6">
                 <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
                 <h3 className="text-2xl font-bold mb-2 text-green-700">Enquiry Sent!</h3>
                 <p className="text-gray-600 text-center">Thank you for your interest. We'll get in touch soon.</p>
               </div>
             ) : (
-              <form className="space-y-6" onSubmit={handleSubmit}>
+              <form className="space-y-6 pt-2 pb-2" onSubmit={handleSubmit}>
                 <h3 className="text-2xl font-bold mb-4 text-green-700">Enquire Now</h3>
                 
                 {formError && (
@@ -198,10 +198,10 @@ export default function Navbar() {
                 )}
 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-1">Name</label>
                   <input
                     type="text"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    placeholder="Name"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black"
                     value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                     required
@@ -210,12 +210,12 @@ export default function Navbar() {
                 </div>
                 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-1">Number</label>
                   <input
                     type="tel"
+                    placeholder="Number"
                     maxLength={10}
                     pattern="\d{10}"
-                    className={`w-full border ${isNumberValid || form.number.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400`}
+                    className={`w-full border ${isNumberValid || form.number.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black`}
                     value={form.number}
                     onChange={handleNumberChange}
                     required
@@ -227,10 +227,10 @@ export default function Navbar() {
                 </div>
                 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-1">Email</label>
                   <input
                     type="email"
-                    className={`w-full border ${isEmailValid || form.email.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400`}
+                    placeholder="Email"
+                    className={`w-full border ${isEmailValid || form.email.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black`}
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                     required
@@ -242,10 +242,10 @@ export default function Navbar() {
                 </div>
                 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-1">Message</label>
                   <textarea
-                    rows={3}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    rows={2}
+                    placeholder="Message"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black"
                     value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                     required

@@ -304,10 +304,10 @@ const PrakritiLanding = () => {
     Reconnect with yourself and your loved ones in a community built around <span className="italic font-bold text-white">harmony, greenery, and endless open space.</span>
     </h2>
     <a
-      href="tel:8007337788"
+      href="tel:8007337766"
       className="text-sm md:text-base cursor-pointer font-bold bg-green-900 hover:bg-green-700 text-white px-6 py-3 rounded-full inline-block shadow-lg"
     >
-      +91 8007337788 &nbsp; | &nbsp; Mau - Kanhe Phata
+      +91 8007337766 &nbsp; | &nbsp; Mau - Kanhe Phata
     </a>
   </div>
 
@@ -434,12 +434,12 @@ const PrakritiLanding = () => {
     <p className="text-gray-600 mb-6 text-sm md:text-base">
       Join the smart investors who've already discovered Prakriti
     </p>
-    <a
-      href="#contact"
-      className="inline-block px-6 md:px-8 py-3 md:py-4 text-white font-bold rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl bg-teal-600 hover:bg-teal-700"
-    >
-      Explore Plots Now
-    </a>
+    <button
+        onClick={() => setIsModalOpen(true)}
+        className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg cursor-pointer"
+      >
+       Enquire Now!
+      </button>
   </div>
 </div>
 
@@ -462,10 +462,18 @@ const PrakritiLanding = () => {
       <EnhancedLocation/>
       </section>
       <SimpleFAQ/>
-      <section id='contact' >
-      
-      </section>
-      
+      <div
+            className="fixed bottom-6 left-6 z-50 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
+            style={{ backgroundColor: '#004d1f' }}
+            onClick={() => {
+              setIsModalOpen(true);
+              setIsMobileMenuOpen(false);
+            }}
+            role="button"
+            tabIndex={0}
+          >
+            I'm interested 
+          </div>
    
      
         <footer className="bg-gray-900 text-white py-12 border-t-4 border-white/10">
@@ -514,7 +522,7 @@ const PrakritiLanding = () => {
             <div className="space-y-2 text-gray-400">
               <div className="flex items-center space-x-2">
             <Phone className="w-4 h-4" />
-            <a href="tel:+918007337788" className="hover:text-white transition-colors">+91 800 733 7788</a>
+            <a href="tel:+918007337766" className="hover:text-white transition-colors">+91 8007337766</a>
               </div>
               <div className="flex items-center space-x-2">
             <MapPin className="w-4 h-4" />
@@ -529,7 +537,7 @@ const PrakritiLanding = () => {
             </div>
             
             <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 Prakriti. All rights reserved. | <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link> | Crafted with care by 
+          <p>&copy; 2025 Prakriti. All rights reserved. | <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link> | Carefully crafted by 
                     <a 
 
 
@@ -589,7 +597,7 @@ const PrakritiLanding = () => {
         
         {/* Call Button */}
         <a
-          href="tel:8378966777"
+          href="tel:8007337766"
           className="flex items-center justify-center text-white w-14 h-14 rounded-full shadow-lg transform hover:scale-110 transition duration-300"
           style={{backgroundColor: '#004d1f'}}
           aria-label="Call Now"
@@ -597,6 +605,7 @@ const PrakritiLanding = () => {
           <Phone size={24} />
         </a>
       </div>
+     
 
       {/* MODAL */}
       {isModalOpen && (
@@ -645,10 +654,10 @@ const PrakritiLanding = () => {
                 )}
 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-1">Name</label>
                   <input
                     type="text"
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    placeholder="Name"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black"
                     value={form.name}
                     onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
                     required
@@ -657,12 +666,12 @@ const PrakritiLanding = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-1">Number</label>
                   <input
                     type="tel"
+                    placeholder="Number"
                     maxLength={10}
                     pattern="\d{10}"
-                    className={`w-full border ${isNumberValid || form.number.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400`}
+                    className={`w-full border ${isNumberValid || form.number.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black`}
                     value={form.number}
                     onChange={handleNumberChange}
                     required
@@ -674,10 +683,10 @@ const PrakritiLanding = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-1">Email</label>
                   <input
                     type="email"
-                    className={`w-full border ${isEmailValid || form.email.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400`}
+                    placeholder="Email"
+                    className={`w-full border ${isEmailValid || form.email.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black`}
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
                     required
@@ -689,10 +698,10 @@ const PrakritiLanding = () => {
                 </div>
                 
                 <div>
-                  <label className="block text-gray-700 font-semibold mb-1">Message</label>
                   <textarea
                     rows={3}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400"
+                    placeholder="Message"
+                    className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black"
                     value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
                     required
