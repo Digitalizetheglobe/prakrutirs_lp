@@ -175,12 +175,12 @@ const Gallery = () => {
             }`}>
             </h2>
             <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-3 sm:mb-4 leading-tight drop-shadow-2xl">
-              Our <span className="text-green-400">Gallery</span>
+              Our <span className="text-green-400">Happy Clients </span>
             </h2>
             <div className={`h-1 w-20 sm:w-32 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-4 sm:mb-6 rounded-full transition-all duration-1000 ${
               isVisible.gallery ? 'scale-100' : 'scale-0'
             }`}></div>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-600 font-light px-4">Click on any image to view full size</p>
+       {/* <p className="text-lg sm:text-xl md:text-2xl text-gray-600 font-light px-4">Click on any image to view full size</p> */}
             <div className="flex justify-center space-x-2 mt-4">
               {[1,2,3].map((i) => (
                 <div key={i} className={`w-2 h-2 bg-green-400 rounded-full animate-bounce`} style={{animationDelay: `${i * 0.2}s`}}></div>
