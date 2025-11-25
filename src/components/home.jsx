@@ -4,6 +4,7 @@ import { MapPin, Phone, Mail, TreePine, Shield, Droplets, Zap, Home, Car, Users,
 import PricingSection from './pricingsection';
 import AmenitiesSection from './amenitiessection';
 import AnimatedGallery from './animatedgallery';
+import Gallery from './gallery';
 import EnhancedLocation from './location';
 import SimpleFAQ from './faq';
 import bg from '../assets/01.png';
@@ -456,6 +457,9 @@ const PrakritiLanding = () => {
 
       <section id="gallery">
         <AnimatedGallery/>
+      </section>
+      <section >
+        <Gallery/>
       </section>
       
       <section id="location">
