@@ -29,7 +29,8 @@ export default function Navbar() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!isNumberValid || !isEmailValid) return;
+    // Validate required fields: name, number, and email
+    if (!form.name.trim() || !isNumberValid || !isEmailValid) return;
 
     setFormLoading(true);
     setFormError('');
@@ -38,15 +39,15 @@ export default function Navbar() {
       // Prepare form data for API with data wrapper
       const requestBody = {
         data: {
-          name: form.name,
+          full_name: form.name,
+          phone_number: form.number,
           email: form.email,
-          number: form.number,
-          messege: form.message, // API expects "messege" instead of "message"
+          message: form.message,
         },
       };
 
       // Send form data to API
-      const response = await fetch('https://api.risingspaces.in/api/forms/forms/691ad13ec476888712e4c06d/submit', {
+      const response = await fetch('https://api.risingspaces.in/api/forms/forms/693928650576098ae1940229/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -100,8 +101,8 @@ export default function Navbar() {
             <a href="#amenities" className="text-gray-700 hover:text-green-600 transition-colors">Amenities</a>
             <a href="#gallery" className="text-gray-700 hover:text-green-600 transition-colors">Gallery</a>
             <a href="#location" className="text-gray-700 hover:text-green-600 transition-colors">Location</a>
-            <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</a>
-            <Link to="/privacy-policy" className="text-gray-700 hover:text-green-600 transition-colors">Privacy Policy</Link>
+            {/* <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</a> */}
+            {/* <Link to="/privacy-policy" className="text-gray-700 hover:text-green-600 transition-colors">Privacy Policy</Link> */}
           </div>
 
           {/* Enquire Button (Hidden on Mobile) */}
@@ -132,7 +133,7 @@ export default function Navbar() {
             <a href="#amenities" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Amenities</a>
             <a href="#gallery" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a>
             <a href="#location" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Location</a>
-            <a href="#contact" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
+            {/* <a href="#contact" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Contact</a> */}
             {/* <Link to="/privacy-policy" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Privacy Policy</Link> */}
              <a
             className="text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
@@ -233,7 +234,7 @@ export default function Navbar() {
                     className={`w-full border ${isEmailValid || form.email.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black`}
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    required
+                    
                     disabled={formLoading}
                   />
                   {!isEmailValid && form.email.length > 0 && (
@@ -248,7 +249,7 @@ export default function Navbar() {
                     className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black"
                     value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                    required
+                    
                     disabled={formLoading}
                   />
                 </div>
@@ -286,7 +287,7 @@ export default function Navbar() {
                 <button
                   type="submit"
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!isNumberValid || !isEmailValid || !isConsentChecked || formLoading}
+                  disabled={!form.name.trim() || !isNumberValid || !isEmailValid || !isConsentChecked || formLoading}
                 >
                   {formLoading ? 'Sending...' : 'Submit'}
                 </button>

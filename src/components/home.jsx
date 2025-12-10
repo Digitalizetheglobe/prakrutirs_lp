@@ -179,7 +179,8 @@ const PrakritiLanding = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    if (!isNumberValid || !isEmailValid) return;
+    // Validate required fields: name, number, and email
+    if (!form.name.trim() || !isNumberValid || !isEmailValid) return;
 
     setFormLoading(true);
     setFormError('');
@@ -188,15 +189,15 @@ const PrakritiLanding = () => {
       // Prepare form data for API with data wrapper
       const requestBody = {
         data: {
-          name: form.name,
+          full_name: form.name,
+          phone_number: form.number,
           email: form.email,
-          number: form.number,
-          messege: form.message, // API expects "messege" instead of "message"
+          message: form.message,
         },
       };
 
       // Send form data to API
-      const response = await fetch('https://api.risingspaces.in/api/forms/forms/691ad13ec476888712e4c06d/submit', {
+      const response = await fetch('https://api.risingspaces.in/api/forms/forms/693928650576098ae1940229/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -507,7 +508,7 @@ const PrakritiLanding = () => {
               <li><a href="#amenities" className="hover:text-white transition-colors">Amenities</a></li>
               <li><a href="#gallery" className="hover:text-white transition-colors">Gallery</a></li>
               <li><a href="#location" className="hover:text-white transition-colors">Location</a></li>
-              <li><Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              <li><Link to="https://risingspaces.in/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
             </ul>
           </div>
           
@@ -541,7 +542,7 @@ const PrakritiLanding = () => {
             </div>
             
             <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 Prakriti. All rights reserved. | <Link to="/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link> | Carefully crafted by 
+          <p>&copy; 2025 Prakriti. All rights reserved. | <Link to="https://risingspaces.in/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link> | Carefully crafted by 
                     <a 
 
 
@@ -693,7 +694,7 @@ const PrakritiLanding = () => {
                     className={`w-full border ${isEmailValid || form.email.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black`}
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    required
+                    
                     disabled={formLoading}
                   />
                   {!isEmailValid && form.email.length > 0 && (
@@ -708,7 +709,7 @@ const PrakritiLanding = () => {
                     className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black"
                     value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                    required
+                   
                     disabled={formLoading}
                   />
                 </div>
@@ -725,7 +726,7 @@ const PrakritiLanding = () => {
                   <label htmlFor="consent-checkbox" className="text-sm text-gray-700">
                     Yes, I consent to the{' '}
                     <Link 
-                      to="/privacy-policy" 
+                      to="https://risingspaces.in/privacy-policy" 
                       className="text-[#00274d] hover:text-[#00444d] underline"
                     >
                       Privacy Policy
@@ -746,7 +747,7 @@ const PrakritiLanding = () => {
                 <button
                   type="submit"
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
-                  disabled={!isNumberValid || !isEmailValid || !isConsentChecked || formLoading}
+                  disabled={!form.name.trim() || !isNumberValid || !isEmailValid || !isConsentChecked || formLoading}
                 >
                   {formLoading ? 'Sending...' : 'Submit'}
                 </button>
