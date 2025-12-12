@@ -535,7 +535,7 @@ const PrakritiLanding = () => {
               </div>
               <div className="flex items-center space-x-2">
             <Mail className="w-4 h-4" />
-            <a href="mailto:info@prakriti.com" className="hover:text-white transition-colors">info@prakriti.com</a>
+            <a href="mailto:info@codenameprakriti.in" className="hover:text-white transition-colors">info@codenameprakriti.in</a>
               </div>
             </div>
           </div>
