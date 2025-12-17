@@ -468,19 +468,37 @@ const PrakritiLanding = () => {
       </section>
       <SimpleFAQ/>
       <div
-            className="fixed bottom-6 left-6 z-50 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
-            style={{ backgroundColor: '#004d1f' }}
-            onClick={() => {
-              setIsModalOpen(true);
-              setIsMobileMenuOpen(false);
-            }}
-            role="button"
-            tabIndex={0}
+        className="hidden md:flex fixed bottom-6 left-6 z-50 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
+        style={{ backgroundColor: '#004d1f' }}
+        onClick={() => {
+          setIsModalOpen(true);
+          setIsMobileMenuOpen(false);
+        }}
+        role="button"
+        tabIndex={0}
+      >
+        I'm interested 
+      </div>
+
+      {/* Mobile-only sticky bottom action bar */}
+      <div className="fixed inset-x-0 bottom-0 z-50 md:hidden">
+        <div className="flex">
+          <a
+            href="tel:+918805390707"
+            className="w-1/2 text-center font-semibold text-white py-3 bg-green-700 hover:bg-green-800 transition-colors"
           >
-            I'm interested 
-          </div>
-   
-     
+            Call Now
+          </a>
+          <button
+            type="button"
+            onClick={() => setIsModalOpen(true)}
+            className="w-1/2 text-center font-semibold text-white py-3 bg-yellow-500 hover:bg-yellow-600 transition-colors"
+          >
+            Enquire Now
+          </button>
+        </div>
+      </div>
+
         <footer className="bg-gray-900 text-white py-12 border-t-4 border-white/10">
           <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-4 gap-8">
