@@ -560,33 +560,7 @@ const PrakritiLanding = () => {
             </div>
             
             <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 Prakriti. All rights reserved. | <Link to="https://risingspaces.in/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link> | Carefully crafted by 
-                    <a 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        href="https://digitalizetheglobe.com/" 
-                        className="text-[#d84a48] hover:text-white transition ml-1"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Digitalize The Globe
-                    </a>.</p>
+          <p>&copy; 2025 Prakriti. All rights reserved. </p>
           <div className="mt-2 text-sm">
             🌿 EK NA PLOT, EK NAYI KAHANI, EK NAYA SAFAR 🌿
           </div>
