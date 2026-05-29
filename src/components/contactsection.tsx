@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MapPin, Users, Send, Star, Zap, Clock } from 'lucide-react';
+import { Phone, MapPin, Users, Send, Star, Zap, Clock, CheckCircle } from 'lucide-react';
 import { link } from 'framer-motion/client';
 
 const ContactSection = () => {
@@ -12,6 +12,9 @@ const ContactSection = () => {
     message: ''
   });
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [formSuccess, setFormSuccess] = useState(false);
+  const [formLoading, setFormLoading] = useState(false);
+  const [formError, setFormError] = useState('');
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -27,10 +30,64 @@ const ContactSection = () => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Handle form submission
+    
+    // Validate required fields: name, phone
+    if (!formData.name.trim() || formData.phone.length !== 10) return;
+
+    setFormLoading(true);
+    setFormError('');
+
+    try {
+      // Prepare form data for API with data wrapper
+      const requestBody = {
+        data: {
+          full_name: formData.name,
+          mobile_number: formData.phone,
+          email_address: formData.email || '',
+          property_type: formData.plotSize ? `${formData.plotSize} sqft Plot` : "NA Plot",
+          location: "Prakriti - Near Takve, Pune",
+          message: formData.message || '',
+        },
+      };
+
+      // Send form data to API
+      const response = await fetch('https://api.risingspaces.in/api/forms/forms/6a158501fbaedc3f5f68b738/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (!response.ok) {
+        throw new Error(`API Error: ${response.status} ${response.statusText}`);
+      }
+
+      const result = await response.json();
+      console.log('Form submitted successfully:', result);
+
+      setFormSuccess(true);
+      
+      // Reset form after success
+      setTimeout(() => {
+        setFormSuccess(false);
+        setFormLoading(false);
+        setFormData({
+          name: '',
+          phone: '',
+          email: '',
+          plotSize: '',
+          message: ''
+        });
+      }, 3000);
+
+    } catch (error) {
+      console.error('Form Submission Error:', error);
+      setFormError('Failed to send enquiry. Please try again or call us directly.');
+      setFormLoading(false);
+    }
   };
 
   const contactInfo = [
@@ -200,98 +257,123 @@ const ContactSection = () => {
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-3xl"></div>
                 
                 <div className="relative z-10">
-                  <div className="flex items-center gap-3 mb-8">
-                    <div className="p-2 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-500">
-                      <Send className="w-6 h-6 text-white" />
+                  {formSuccess ? (
+                    <div className="flex flex-col items-center justify-center py-12 text-center">
+                      <div className="p-4 rounded-full bg-emerald-500/20 border border-emerald-500/30 mb-6 animate-pulse">
+                        <CheckCircle className="w-16 h-16 text-emerald-400" />
+                      </div>
+                      <h3 className="text-3xl font-bold text-white mb-3">Enquiry Sent!</h3>
+                      <p className="text-gray-300 text-lg max-w-sm">
+                        Thank you for your interest in Prakriti. Our property consultant will get in touch with you shortly.
+                      </p>
                     </div>
-                    <h3 className="text-2xl font-bold text-white">Quick Inquiry</h3>
-                  </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                      <div className="flex items-center gap-3 mb-8">
+                        <div className="p-2 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-500">
+                          <Send className="w-6 h-6 text-white" />
+                        </div>
+                        <h3 className="text-2xl font-bold text-white">Quick Inquiry</h3>
+                      </div>
 
-                  <div className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-6">
+                      {formError && (
+                        <div className="bg-red-500/10 border border-red-500/20 text-red-200 px-4 py-3 rounded-lg text-sm mb-4">
+                          {formError}
+                        </div>
+                      )}
+
+                      <div className="grid md:grid-cols-2 gap-6">
+                        <div className="group">
+                          <input
+                            type="text"
+                            name="name"
+                            placeholder="Your Name"
+                            value={formData.name}
+                            onChange={handleInputChange}
+                            required
+                            disabled={formLoading}
+                            className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15"
+                          />
+                        </div>
+                        <div className="group">
+                          <input
+                            type="tel"
+                            name="phone"
+                            placeholder="Phone Number"
+                            value={formData.phone}
+                            onChange={(e) => {
+                              // Only allow numbers and max 10 digits
+                              const value = e.target.value.replace(/\D/g, '').slice(0, 10);
+                              setFormData({ ...formData, phone: value });
+                            }}
+                            pattern="\d{10}"
+                            maxLength={10}
+                            required
+                            disabled={formLoading}
+                            inputMode="numeric"
+                            autoComplete="tel"
+                            className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15"
+                          />
+                          {formData.phone && formData.phone.length !== 10 && (
+                            <p className="text-red-400 text-xs mt-1">Enter a valid 10-digit phone number</p>
+                          )}
+                        </div>
+                      </div>
+
                       <div className="group">
                         <input
-                          type="text"
-                          name="name"
-                          placeholder="Your Name"
-                          value={formData.name}
+                          type="email"
+                          name="email"
+                          placeholder="Email Address"
+                          value={formData.email}
                           onChange={handleInputChange}
+                          disabled={formLoading}
                           className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15"
                         />
                       </div>
-                        <div className="group">
-                        <input
-                          type="tel"
-                          name="phone"
-                          placeholder="Phone Number"
-                          value={formData.phone}
-                          onChange={(e) => {
-                          // Only allow numbers and max 10 digits
-                          const value = e.target.value.replace(/\D/g, '').slice(0, 10);
-                          setFormData({ ...formData, phone: value });
-                          }}
-                          pattern="\d{10}"
-                          maxLength={10}
-                          required
-                          inputMode="numeric"
-                          autoComplete="tel"
-                          className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15"
-                        />
-                        {formData.phone && formData.phone.length !== 10 && (
-                          <p className="text-red-400 text-xs mt-1">Enter a valid 10-digit phone number</p>
-                        )}
-                        </div>
-                    </div>
 
-                    <div className="group">
-                      <input
-                        type="email"
-                        name="email"
-                        placeholder="Email Address"
-                        value={formData.email}
-                        onChange={handleInputChange}
-                        className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15"
-                      />
-                    </div>
+                      <div className="group">
+                        <select
+                          name="plotSize"
+                          value={formData.plotSize}
+                          onChange={handleInputChange}
+                          disabled={formLoading}
+                          className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15 appearance-none cursor-pointer"
+                        >
+                          <option value="" className="bg-gray-800 text-white">Select Plot Size</option>
+                          {plotSizes.map((size) => (
+                            <option key={size.value} value={size.value} className="bg-gray-800 text-white">
+                              {size.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
 
-                    <div className="group">
-                      <select
-                        name="plotSize"
-                        value={formData.plotSize}
-                        onChange={handleInputChange}
-                        className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15 appearance-none cursor-pointer"
+                      <div className="group">
+                        <textarea
+                          name="message"
+                          placeholder="Your Message (Optional)"
+                          rows={4}
+                          value={formData.message}
+                          onChange={handleInputChange}
+                          disabled={formLoading}
+                          className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15 resize-none"
+                        ></textarea>
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={formLoading || !formData.name.trim() || formData.phone.length !== 10}
+                        className="group relative w-full p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25 disabled:opacity-50 disabled:cursor-not-allowed"
                       >
-                        <option value="" className="bg-gray-800 text-white">Select Plot Size</option>
-                        {plotSizes.map((size) => (
-                          <option key={size.value} value={size.value} className="bg-gray-800 text-white">
-                            {size.label}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-
-                    <div className="group">
-                      <textarea
-                        name="message"
-                        placeholder="Your Message (Optional)"
-                        rows={4}
-                        value={formData.message}
-                        onChange={handleInputChange}
-                        className="w-full p-4 rounded-xl bg-white/10 backdrop-blur-md border border-white/20 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500/50 focus:border-cyan-500/50 transition-all duration-300 group-hover:bg-white/15 resize-none"
-                      ></textarea>
-                    </div>
-
-                    <button
-                      type="submit"
-                      className="group relative w-full p-4 rounded-xl bg-gradient-to-r from-cyan-500 to-purple-500 text-white font-semibold overflow-hidden transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-cyan-500/25"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
-                      <div className="relative flex items-center justify-center gap-2">
-                        <Send className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
-                        <span>Send Inquiry</span>
-                      </div>
-                    </button>
-                  </div>
+                        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+                        <div className="relative flex items-center justify-center gap-2">
+                          <Send className="w-5 h-5 group-hover:rotate-12 transition-transform duration-300" />
+                          <span>{formLoading ? 'Sending...' : 'Send Inquiry'}</span>
+                        </div>
+                      </button>
+                    </form>
+                  )}
                 </div>
               </div>
             </div>

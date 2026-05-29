@@ -40,14 +40,16 @@ export default function Navbar() {
       const requestBody = {
         data: {
           full_name: form.name,
-          phone_number: form.number,
-          email: form.email,
+          mobile_number: form.number,
+          email_address: form.email,
+          property_type: "NA Plot",
+          location: "Prakriti - Near Takve, Pune",
           message: form.message,
         },
       };
 
       // Send form data to API
-      const response = await fetch('https://api.risingspaces.in/api/forms/forms/693928650576098ae1940229/submit', {
+      const response = await fetch('https://api.risingspaces.in/api/forms/forms/6a158501fbaedc3f5f68b738/submit', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
