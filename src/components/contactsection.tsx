@@ -32,7 +32,7 @@ const ContactSection = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate required fields: name, phone
     if (!formData.name.trim() || formData.phone.length !== 10) return;
 
@@ -69,7 +69,7 @@ const ContactSection = () => {
       console.log('Form submitted successfully:', result);
 
       setFormSuccess(true);
-      
+
       // Reset form after success
       setTimeout(() => {
         setFormSuccess(false);
@@ -151,64 +151,62 @@ const ContactSection = () => {
             {/* Contact Info Cards */}
             <div className="lg:col-span-1 space-y-6">
               {/* Call Now Card */}
-               <div
-    className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 cursor-pointer transition-all duration-500 hover:scale-105 hover:bg-white/10 ${
-      hoveredCard === 1 ? 'shadow-2xl shadow-cyan-500/20' : ''
-    }`}
-    onMouseEnter={() => setHoveredCard(1)}
-    onMouseLeave={() => setHoveredCard(null)}
-  >
-              <a
-  href="tel:+918007337766"
-  className="flex items-start gap-4 group"
-  style={{ cursor: 'pointer' }}
->
-  <div className="relative p-3 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 group-hover:scale-110 transition-transform duration-300">
-    <Phone className="w-6 h-6 text-white" />
-    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-  </div>
-  <div className="flex-1">
-    <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-      Call Now
-    </h3>
-    <span className="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
-      +91 800 733 7766
-    </span>
-  </div>
-</a>
-</div>
+              <div
+                className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 cursor-pointer transition-all duration-500 hover:scale-105 hover:bg-white/10 ${hoveredCard === 1 ? 'shadow-2xl shadow-cyan-500/20' : ''
+                  }`}
+                onMouseEnter={() => setHoveredCard(1)}
+                onMouseLeave={() => setHoveredCard(null)}
+              >
+                <a
+                  href="tel:+918007337766"
+                  className="flex items-start gap-4 group"
+                  style={{ cursor: 'pointer' }}
+                >
+                  <div className="relative p-3 rounded-xl bg-gradient-to-r from-emerald-400 to-cyan-400 group-hover:scale-110 transition-transform duration-300">
+                    <Phone className="w-6 h-6 text-white" />
+                    <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                  <div className="flex-1">
+                    <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                      Call Now
+                    </h3>
+                    <span className="text-xl font-bold text-cyan-400 hover:text-cyan-300 transition-colors">
+                      +91 800 733 7766
+                    </span>
+                  </div>
+                </a>
+              </div>
 
               {/* Project Location Card */}
-            <a
-  href="https://maps.app.goo.gl/dVpH5s47ry8QjMe88?g_st=iw"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="block"
->
-  <div
-    className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 cursor-pointer transition-all duration-500 hover:scale-105 hover:bg-white/10 ${
-      hoveredCard === 1 ? 'shadow-2xl shadow-cyan-500/20' : ''
-    }`}
-    onMouseEnter={() => setHoveredCard(1)}
-    onMouseLeave={() => setHoveredCard(null)}
-  >
-    <div className="flex items-start gap-4">
-      <div className="relative p-3 rounded-xl bg-gradient-to-r from-purple-400 to-pink-400 group-hover:scale-110 transition-transform duration-300">
-        <MapPin className="w-6 h-6 text-white" />
-        <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-      </div>
-      <div className="flex-1">
-        <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors">
-          Project Location
-        </h3>
-        <p className="text-xl font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors">
-          Near Takve, Pune
-        </p>
-      </div>
-    </div>
-    <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
-  </div>
-</a>
+              <a
+                href="https://maps.app.goo.gl/dVpH5s47ry8QjMe88?g_st=iw"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block"
+              >
+                <div
+                  className={`group relative p-6 rounded-2xl bg-white/5 backdrop-blur-md border border-white/10 cursor-pointer transition-all duration-500 hover:scale-105 hover:bg-white/10 ${hoveredCard === 1 ? 'shadow-2xl shadow-cyan-500/20' : ''
+                    }`}
+                  onMouseEnter={() => setHoveredCard(1)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="relative p-3 rounded-xl bg-gradient-to-r from-purple-400 to-pink-400 group-hover:scale-110 transition-transform duration-300">
+                      <MapPin className="w-6 h-6 text-white" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-cyan-300 transition-colors">
+                        Project Location
+                      </h3>
+                      <p className="text-xl font-bold text-cyan-400 group-hover:text-cyan-300 transition-colors">
+                        Near Takve, Pune
+                      </p>
+                    </div>
+                  </div>
+                  <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-purple-400 to-pink-400 opacity-0 group-hover:opacity-10 transition-opacity duration-300"></div>
+                </div>
+              </a>
 
 
 
@@ -255,7 +253,7 @@ const ContactSection = () => {
             <div className="lg:col-span-2">
               <div className="relative p-8 rounded-3xl bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-xl border border-white/20 shadow-2xl">
                 <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-br from-cyan-500/5 to-purple-500/5 rounded-3xl"></div>
-                
+
                 <div className="relative z-10">
                   {formSuccess ? (
                     <div className="flex flex-col items-center justify-center py-12 text-center">

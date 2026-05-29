@@ -235,7 +235,7 @@ const AnimatedGallery = () => {
               isVisible.gallery ? 'scale-100 rotate-0' : 'scale-75 rotate-12'
             }`}>
             </h2>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-gray-900 mb-3 sm:mb-4 leading-tight drop-shadow-2xl">
+            <h2 className="text-xl sm:text-4xl md:text-6xl font-black text-gray-900 mb-3 sm:mb-4 leading-tight drop-shadow-2xl">
               Our <span className="text-green-400">Gallery</span>
             </h2>
             <div className={`h-1 w-20 sm:w-32 bg-gradient-to-r from-green-500 to-blue-500 mx-auto mb-4 sm:mb-6 rounded-full transition-all duration-1000 ${
