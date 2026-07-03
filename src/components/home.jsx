@@ -8,6 +8,9 @@ import Gallery from './gallery';
 import EnhancedLocation from './location';
 import SimpleFAQ from './faq';
 import bg from '../assets/01.png';
+import db from '../assets/prakruti_new.webp';
+import tb from '../assets/parkruti_new_tab.webp';
+import mb from '../assets/prakruti_new_mobile.webp';
 import ContactSection from './contactsection';
 import logo from '../assets/1_Black.png'; // Update the path if your logo is different
 import logof from '../assets/1_White.png'; // Update the path if your logo is different
@@ -30,12 +33,12 @@ const PrakritiLanding = () => {
 
   useEffect(() => {
     setIsVisible(true);
-    
+
     // Auto-cycle through features
     const interval = setInterval(() => {
       setActiveFeature(prev => (prev + 1) % 4);
     }, 3000);
-    
+
     return () => clearInterval(interval);
   }, []);
 
@@ -45,7 +48,7 @@ const PrakritiLanding = () => {
       const scrollPosition = window.scrollY;
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight;
-      
+
       // Show buttons when scrolled down a bit
       setShowScrollButtons(scrollPosition > 200);
     };
@@ -178,7 +181,7 @@ const PrakritiLanding = () => {
   // Handle form submission with API
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     // Validate required fields: name, number, and email
     if (!form.name.trim() || !isNumberValid || !isEmailValid) return;
 
@@ -215,7 +218,7 @@ const PrakritiLanding = () => {
       console.log('Form submitted successfully:', result);
 
       setFormSuccess(true);
-      
+
       // Reset form after success
       setTimeout(() => {
         setIsModalOpen(false);
@@ -234,112 +237,124 @@ const PrakritiLanding = () => {
   };
 
   // Mock components for sections not provided
- 
-
- 
 
 
- 
-  
+
+
+
+
+
 
   return (
     <div className="min-h-screen bg-white">
       {/* Navigation */}
       <Navbar />
-      
+
       {/* Privacy Consent Banner */}
       <PrivacyConsentBanner />
 
+      {/* New Hero Section */}
+      <section id="hero" className="w-full mt-[50px] md:mt-[80px]">
+        {/* Desktop Banner */}
+        <img src={db} alt="Desktop Banner" className="hidden lg:block w-full h-auto object-cover" />
+        {/* Tablet Banner */}
+        <img src={tb} alt="Tablet Banner" className="hidden md:block lg:hidden w-full h-auto object-cover" />
+        {/* Mobile Banner */}
+        <img src={mb} alt="Mobile Banner" className="block md:hidden w-full h-auto object-cover" />
+      </section>
+
       {/* Hero Section - Clean, No Background Animation */}
-     <section id="hero" className="relative min-h-screen flex flex-col justify-between">
-  {/* Static Background Image */}
-  <div className="absolute inset-0 z-0">
-    <img 
-      src={bg} 
-      alt="Prakriti" 
-      className="w-full h-full object-cover" 
-    />
-  </div>
+      {false && (
+        <section id="hero-old" className="relative min-h-screen flex flex-col justify-between">
+          {/* Static Background Image */}
+          <div className="absolute inset-0 z-0">
+            <img
+              src={bg}
+              alt="Prakriti"
+              className="w-full h-full object-cover"
+            />
+          </div>
 
-  {/* Overlay */}
-  <div className="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black bg-opacity-50 z-10"></div>
 
-  {/* Top-right Content */}
- 
+          {/* Top-right Content */}
 
-<div className="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-8 px-4 md:px-[100px] pt-24 md:pt-40 z-50">
 
-  {/* Left Block - Welcome */}
-  <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-6">
-    <h2 className="text-4xl md:text-6xl font-bold drop-shadow-lg text-white leading-tight">
-      Welcome to <br /><span className="text-green-300">PRAKRITI</span>
-    </h2>
-    <p className="text-base md:text-2xl drop-shadow-lg max-w-xl text-white mx-auto md:mx-0">
-      Your Gateway to Peaceful Living in Nature's Embrace
-    </p>
-    <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-      <button
-        onClick={() => setIsModalOpen(true)}
-        className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg cursor-pointer"
-      >
-       Enquire Now!
-      </button>
-      <a href="#gallery"
-        className="px-6 py-3 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-green-600 transition-all duration-300"
-      >
-        View Gallery
-      </a>
-    </div>
-  </div>
+          <div className="flex flex-col md:flex-row items-center md:items-stretch justify-center gap-8 px-4 md:px-[100px] pt-24 md:pt-40 z-50">
 
-  {/* Divider */}
-  <div className="hidden md:flex items-center">
-    <div className="h-[250px] w-[2px] bg-white/40 rounded-full"></div>
-  </div>
-  <div className="block md:hidden w-full h-[2px] bg-white/40 my-8 rounded-full"></div>
+            {/* Left Block - Welcome */}
+            <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-6">
+              <h2 className="text-4xl md:text-6xl font-bold drop-shadow-lg text-white leading-tight">
+                Welcome to <br /><span className="text-green-300">PRAKRITI</span>
+              </h2>
+              <p className="text-base md:text-2xl drop-shadow-lg max-w-xl text-white mx-auto md:mx-0">
+                Your Gateway to Peaceful Living in Nature's Embrace
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg cursor-pointer"
+                >
+                  Enquire Now!
+                </button>
+                <a href="#gallery"
+                  className="px-6 py-3 bg-transparent border-2 border-white text-white font-bold rounded-full hover:bg-white hover:text-green-600 transition-all duration-300"
+                >
+                  View Gallery
+                </a>
+              </div>
+            </div>
 
-  {/* Right Block - Plot Info */}
-  <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-4">
-    {/* <p className="text-base md:text-2xl font-semibold text-white drop-shadow-md">
+            {/* Divider */}
+            <div className="hidden md:flex items-center">
+              <div className="h-[250px] w-[2px] bg-white/40 rounded-full"></div>
+            </div>
+            <div className="block md:hidden w-full h-[2px] bg-white/40 my-8 rounded-full"></div>
+
+            {/* Right Block - Plot Info */}
+            <div className="flex-1 flex flex-col justify-center items-center md:items-start text-center md:text-left space-y-4">
+              {/* <p className="text-base md:text-2xl font-semibold text-white drop-shadow-md">
       This monsoon, grab the coolest pre-launch deal 
     </p> */}
-    <h2 className="text-xl md:text-3xl font-extrabold drop-shadow-lg text-green-200 leading-snug">
-      {/* Just ₹50K token and your plot is <span className="italic font-bold">RESERVED!</span>  */}
-    Reconnect with yourself and your loved ones in a community built around <span className="italic font-bold text-white">harmony, greenery, and endless open space.</span>
-    </h2>
-    <a
-      href="tel:8007337766"
-      className="text-sm md:text-base cursor-pointer font-bold bg-green-900 hover:bg-green-700 text-white px-6 py-3 rounded-full inline-block shadow-lg"
-    >
-      +91 8007337766 &nbsp; | &nbsp; Mau - Kanhe Phata
-    </a>
-  </div>
+              <h2 className="text-xl md:text-3xl font-extrabold drop-shadow-lg text-green-200 leading-snug">
+                {/* Just ₹50K token and your plot is <span className="italic font-bold">RESERVED!</span>  */}
+                Reconnect with yourself and your loved ones in a community built around <span className="italic font-bold text-white">harmony, greenery, and endless open space.</span>
+              </h2>
+              <a
+                href="tel:8007337766"
+                className="text-sm md:text-base cursor-pointer font-bold bg-green-900 hover:bg-green-700 text-white px-6 py-3 rounded-full inline-block shadow-lg"
+              >
+                +91 8007337766 &nbsp; | &nbsp; Mau - Kanhe Phata
+              </a>
+            </div>
 
-</div>
+          </div>
 
-  {/* Divider */}
-  <div className="w-16 h-1 bg-white rounded-full opacity-30 mx-auto mb-6 md:mb-0"></div>
-</section>
+          {/* Divider */}
+          <div className="w-16 h-1 bg-white rounded-full opacity-30 mx-auto mb-6 md:mb-0"></div>
+        </section>
+      )}
 
 
       {/* About Section */}
       <section id="about" className="relative overflow-hidden bg-white">
         <div className="relative z-10 container mx-auto px-6 py-10">
-          
+
           {/* Header */}
           <div className="text-center mb-10">
             <div className="inline-block">
-             
-                <h2 className="text-5xl md:text-5xl font-black text-gray/900 mb-4 leading-tight drop-shadow-2xl">
-            About<span className=" text-green-400"> Prakriti</span>
-          </h2>
+
+              <h2 className="text-5xl md:text-5xl font-black text-gray/900 mb-4 leading-tight drop-shadow-2xl">
+                About<span className=" text-green-400"> Prakriti</span>
+              </h2>
               <div className="flex items-center justify-center space-x-2 text-2xl">
                 <span className="text-gray-600 font-light">Nature's Paradise Awaits</span>
               </div>
             </div>
             <p className="text-xl text-gray-600 max-w-4xl mx-auto mt-8 leading-relaxed">
-              Where <span className="font-semibold text-green-600">Nature's Beauty</span> meets 
-              <span className="font-semibold text-green-700"> Smart Investment</span> for your 
+              Where <span className="font-semibold text-green-600">Nature's Beauty</span> meets
+              <span className="font-semibold text-green-700"> Smart Investment</span> for your
               <span className="font-semibold text-teal-700"> Perfect Weekend Escape</span>
             </p>
           </div>
@@ -347,7 +362,7 @@ const PrakritiLanding = () => {
           <div className="max-w-6xl mx-auto">
             {/* Main Content Grid */}
             <div className="grid lg:grid-cols-2 gap-16 items-start">
-              
+
               {/* Features Section */}
               <div className="space-y-8">
                 <h3 className="text-4xl font-bold text-gray-800 mb-8 flex items-center">
@@ -355,29 +370,27 @@ const PrakritiLanding = () => {
                     Why Choose Prakriti?
                   </span>
                 </h3>
-                
+
                 <div className="grid gap-6">
                   {features.map((feature, index) => (
                     <div
                       key={index}
-                      className={`group relative p-6 rounded-2xl border transition-all duration-500 cursor-pointer transform hover:scale-105 ${
-                        activeFeature === index
+                      className={`group relative p-6 rounded-2xl border transition-all duration-500 cursor-pointer transform hover:scale-105 ${activeFeature === index
                           ? 'bg-green-50 border-green-200 shadow-2xl'
                           : 'bg-gray-50 border-gray-200 hover:bg-green-25 hover:border-green-300'
-                      }`}
+                        }`}
                       onMouseEnter={() => setActiveFeature(index)}
                     >
                       <div className="flex items-start space-x-4">
-                        <div 
-                          className="p-3 rounded-xl text-white shadow-lg transform transition-transform group-hover:rotate-12" 
-                          style={{backgroundColor: feature.color}}
+                        <div
+                          className="p-3 rounded-xl text-white shadow-lg transform transition-transform group-hover:rotate-12"
+                          style={{ backgroundColor: feature.color }}
                         >
                           {feature.icon}
                         </div>
                         <div className="flex-1">
-                          <h4 className={`text-xl font-bold mb-2 transition-colors ${
-                            activeFeature === index ? 'text-green-600' : 'text-gray-800'
-                          }`}>
+                          <h4 className={`text-xl font-bold mb-2 transition-colors ${activeFeature === index ? 'text-green-600' : 'text-gray-800'
+                            }`}>
                             {feature.title}
                           </h4>
                           <p className="text-gray-600 leading-relaxed">
@@ -385,7 +398,7 @@ const PrakritiLanding = () => {
                           </p>
                         </div>
                       </div>
-                      
+
                       {/* Active indicator */}
                       {activeFeature === index && (
                         <div className="absolute left-0 top-0 bottom-0 w-1 rounded-r-full bg-green-500"></div>
@@ -396,79 +409,79 @@ const PrakritiLanding = () => {
               </div>
 
               {/* Specifications Section */}
-            <div className="space-y-8 px-4 md:px-0">
-  {/* Project Specifications Section */}
-  <div className="relative">
-    <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-green-100 to-teal-100 opacity-50 blur-xl"></div>
-    <div className="relative bg-gradient-to-br from-green-50 to-teal-50 rounded-3xl p-6 md:p-8 border border-green-200 shadow-lg">
-      
-      <div className="text-center mb-6 md:mb-8">
-        <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Project Specifications</h3>
-        <div className="w-20 md:w-24 h-1 mx-auto rounded-full bg-green-500"></div>
-      </div>
+              <div className="space-y-8 px-4 md:px-0">
+                {/* Project Specifications Section */}
+                <div className="relative">
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-green-100 to-teal-100 opacity-50 blur-xl"></div>
+                  <div className="relative bg-gradient-to-br from-green-50 to-teal-50 rounded-3xl p-6 md:p-8 border border-green-200 shadow-lg">
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {specs.map((spec, index) => (
-          <div
-            key={index}
-            className="group bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-2xl border border-green-200 hover:border-green-300 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg"
-          >
-            <div className="flex items-center space-x-3 mb-3">
-              <div className="p-2 rounded-lg text-white bg-teal-600">
-                {spec.icon}
-              </div>
-              <div className="font-semibold text-gray-600 text-sm leading-tight">
-                {spec.label}
-              </div>
-            </div>
-            <div className="text-xl md:text-2xl font-bold text-green-600">
-              {spec.value}
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </div>
+                    <div className="text-center mb-6 md:mb-8">
+                      <h3 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Project Specifications</h3>
+                      <div className="w-20 md:w-24 h-1 mx-auto rounded-full bg-green-500"></div>
+                    </div>
 
-  {/* CTA Section */}
-  <div className="text-center p-6 md:p-8 rounded-2xl border border-green-200 bg-gradient-to-br from-green-50 to-teal-50">
-    <h4 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">
-      Ready to Invest in Your Future?
-    </h4>
-    <p className="text-gray-600 mb-6 text-sm md:text-base">
-      Join the smart investors who've already discovered Prakriti
-    </p>
-    <button
-        onClick={() => setIsModalOpen(true)}
-        className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg cursor-pointer"
-      >
-       Enquire Now!
-      </button>
-  </div>
-</div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      {specs.map((spec, index) => (
+                        <div
+                          key={index}
+                          className="group bg-white/80 backdrop-blur-sm p-4 md:p-6 rounded-2xl border border-green-200 hover:border-green-300 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg"
+                        >
+                          <div className="flex items-center space-x-3 mb-3">
+                            <div className="p-2 rounded-lg text-white bg-teal-600">
+                              {spec.icon}
+                            </div>
+                            <div className="font-semibold text-gray-600 text-sm leading-tight">
+                              {spec.label}
+                            </div>
+                          </div>
+                          <div className="text-xl md:text-2xl font-bold text-green-600">
+                            {spec.value}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                {/* CTA Section */}
+                <div className="text-center p-6 md:p-8 rounded-2xl border border-green-200 bg-gradient-to-br from-green-50 to-teal-50">
+                  <h4 className="text-xl md:text-2xl font-bold text-gray-800 mb-4">
+                    Ready to Invest in Your Future?
+                  </h4>
+                  <p className="text-gray-600 mb-6 text-sm md:text-base">
+                    Join the smart investors who've already discovered Prakriti
+                  </p>
+                  <button
+                    onClick={() => setIsModalOpen(true)}
+                    className="px-6 py-3 bg-green-600 hover:bg-green-700 text-white font-bold rounded-full transform hover:scale-105 transition-all duration-300 shadow-lg cursor-pointer"
+                  >
+                    Enquire Now!
+                  </button>
+                </div>
+              </div>
 
             </div>
           </div>
         </div>
       </section>
-      
-      <PricingSection/>
+
+      <PricingSection />
       <section id="amenities">
-        <AmenitiesSection/>
+        <AmenitiesSection />
       </section>
-      
+
 
       <section id="gallery">
-        <AnimatedGallery/>
+        <AnimatedGallery />
       </section>
       <section >
-        <Gallery/>
+        <Gallery />
       </section>
-      
+
       <section id="location">
-      <EnhancedLocation/>
+        <EnhancedLocation />
       </section>
-      <SimpleFAQ/>
+      <SimpleFAQ />
       <div
         className="hidden md:flex fixed bottom-6 left-6 z-50 text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
         style={{ backgroundColor: '#004d1f' }}
@@ -479,7 +492,7 @@ const PrakritiLanding = () => {
         role="button"
         tabIndex={0}
       >
-        I'm interested 
+        I'm interested
       </div>
 
       {/* Mobile-only sticky bottom action bar */}
@@ -501,76 +514,76 @@ const PrakritiLanding = () => {
         </div>
       </div>
 
-        <footer className="bg-gray-900 text-white py-12 border-t-4 border-white/10">
-          <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-4 gap-8">
-          <div>
-            <img
-              src={logof}
-              alt="Pawna Lake Villas Logo"
-              className="h-[140px] w-auto "
-            />
-           
-            <p className="text-gray-400 mb-4">
-              Your gateway to peaceful living in nature's embrace. Premium NA plots with world-class amenities.
-            </p>
-            {/* <div className="flex space-x-4">
+      <footer className="bg-gray-900 text-white py-12 border-t-4 border-white/10">
+        <div className="container mx-auto px-4">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div>
+              <img
+                src={logof}
+                alt="Pawna Lake Villas Logo"
+                className="h-[140px] w-auto "
+              />
+
+              <p className="text-gray-400 mb-4">
+                Your gateway to peaceful living in nature's embrace. Premium NA plots with world-class amenities.
+              </p>
+              {/* <div className="flex space-x-4">
               <Facebook className="w-6 h-6 text-gray-400 hover:text-white cursor-pointer transition-colors" />
               <Instagram className="w-6 h-6 text-gray-400 hover:text-white cursor-pointer transition-colors" />
               <Twitter className="w-6 h-6 text-gray-400 hover:text-white cursor-pointer transition-colors" />
             </div> */}
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-gray-400">
-              <li><a href="#about" className="hover:text-white transition-colors">About Project</a></li>
-              <li><a href="#amenities" className="hover:text-white transition-colors">Amenities</a></li>
-              <li><a href="#gallery" className="hover:text-white transition-colors">Gallery</a></li>
-              <li><a href="#location" className="hover:text-white transition-colors">Location</a></li>
-              <li><Link to="https://risingspaces.in/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Project Info</h3>
-            <ul className="space-y-2 text-gray-400">
-              <li>Builder: Chirag Khandge, Parag Dhore, Sunil Kashid, Vijay Bajare</li>
-              <li>Partner: Rising Spaces</li>
-              <li>Authority: PMRDA</li>
-              <li>Total Area: 5 Acres</li>
-            </ul>
-          </div>
-          
-          <div>
-            <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
-            <div className="space-y-2 text-gray-400">
-              <div className="flex items-center space-x-2">
-            <Phone className="w-4 h-4" />
-            <a href="tel:+918007337766" className="hover:text-white transition-colors">+91 8007337766</a>
-              </div>
-              <div className="flex items-center space-x-2">
-            <MapPin className="w-4 h-4" />
-            <a href="https://www.google.com/maps/search/?api=1&query=Near+Takve,+Pune" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Near Takve, Pune</a>
-              </div>
-              <div className="flex items-center space-x-2">
-            <Mail className="w-4 h-4" />
-            <a href="mailto:info@codenameprakriti.in" className="hover:text-white transition-colors">info@codenameprakriti.in</a>
-              </div>
             </div>
-          </div>
-            </div>
-            
-            <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-          <p>&copy; 2025 Prakriti. All rights reserved. </p>
-          <div className="mt-2 text-sm">
-            🌿 EK NA PLOT, EK NAYI KAHANI, EK NAYA SAFAR 🌿
-          </div>
-            </div>
-          </div>
-        </footer>
 
-        {/* Scroll Buttons and Call Button */}
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Quick Links</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li><a href="#about" className="hover:text-white transition-colors">About Project</a></li>
+                <li><a href="#amenities" className="hover:text-white transition-colors">Amenities</a></li>
+                <li><a href="#gallery" className="hover:text-white transition-colors">Gallery</a></li>
+                <li><a href="#location" className="hover:text-white transition-colors">Location</a></li>
+                <li><Link to="https://risingspaces.in/privacy-policy" className="hover:text-white transition-colors">Privacy Policy</Link></li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Project Info</h3>
+              <ul className="space-y-2 text-gray-400">
+                <li>Builder: Chirag Khandge, Parag Dhore, Sunil Kashid, Vijay Bajare</li>
+                <li>Partner: Rising Spaces</li>
+                <li>Authority: PMRDA</li>
+                <li>Total Area: 5 Acres</li>
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="text-lg font-semibold mb-4">Contact Info</h3>
+              <div className="space-y-2 text-gray-400">
+                <div className="flex items-center space-x-2">
+                  <Phone className="w-4 h-4" />
+                  <a href="tel:+918007337766" className="hover:text-white transition-colors">+91 8007337766</a>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <MapPin className="w-4 h-4" />
+                  <a href="https://www.google.com/maps/search/?api=1&query=Near+Takve,+Pune" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Near Takve, Pune</a>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Mail className="w-4 h-4" />
+                  <a href="mailto:info@codenameprakriti.in" className="hover:text-white transition-colors">info@codenameprakriti.in</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2025 Prakriti. All rights reserved. </p>
+            <div className="mt-2 text-sm">
+              🌿 EK NA PLOT, EK NAYI KAHANI, EK NAYA SAFAR 🌿
+            </div>
+          </div>
+        </div>
+      </footer>
+
+      {/* Scroll Buttons and Call Button */}
       <div className="fixed bottom-6 right-6 z-50 flex flex-col gap-3">
         {/* Scroll to Top Button */}
         {showScrollButtons && (
@@ -582,7 +595,7 @@ const PrakritiLanding = () => {
             <ChevronUp size={24} />
           </button>
         )}
-        
+
         {/* Scroll to Bottom Button */}
         {showScrollButtons && (
           <button
@@ -593,22 +606,22 @@ const PrakritiLanding = () => {
             <ChevronDown size={24} />
           </button>
         )}
-        
+
         {/* Call Button */}
         <a
           href="tel:8007337766"
           className="flex items-center justify-center text-white w-14 h-14 rounded-full shadow-lg transform hover:scale-110 transition duration-300"
-          style={{backgroundColor: '#004d1f'}}
+          style={{ backgroundColor: '#004d1f' }}
           aria-label="Call Now"
         >
           <Phone size={24} />
         </a>
       </div>
-     
+
 
       {/* MODAL */}
       {isModalOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-[99999] flex items-center justify-center bg-black bg-opacity-50 px-4"
           onClick={(e) => {
             if (e.target === e.currentTarget && !formLoading) {
@@ -635,7 +648,7 @@ const PrakritiLanding = () => {
             >
               &times;
             </button>
-            
+
             {formSuccess ? (
               <div className="flex flex-col items-center justify-center py-12">
                 <CheckCircle className="w-16 h-16 text-green-500 mb-4" />
@@ -645,7 +658,7 @@ const PrakritiLanding = () => {
             ) : (
               <form className="space-y-6" onSubmit={handleSubmit}>
                 <h3 className="text-2xl font-bold mb-4 text-green-700">Enquire Now</h3>
-                
+
                 {formError && (
                   <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg text-sm">
                     {formError}
@@ -663,7 +676,7 @@ const PrakritiLanding = () => {
                     disabled={formLoading}
                   />
                 </div>
-                
+
                 <div>
                   <input
                     type="tel"
@@ -680,7 +693,7 @@ const PrakritiLanding = () => {
                     <p className="text-red-500 text-xs mt-1">Please enter a valid 10-digit number.</p>
                   )}
                 </div>
-                
+
                 <div>
                   <input
                     type="email"
@@ -688,14 +701,14 @@ const PrakritiLanding = () => {
                     className={`w-full border ${isEmailValid || form.email.length === 0 ? 'border-gray-300' : 'border-red-500'} rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black`}
                     value={form.email}
                     onChange={e => setForm(f => ({ ...f, email: e.target.value }))}
-                    
+
                     disabled={formLoading}
                   />
                   {!isEmailValid && form.email.length > 0 && (
                     <p className="text-red-500 text-xs mt-1">Email must contain "gmail.com".</p>
                   )}
                 </div>
-                
+
                 <div>
                   <textarea
                     rows={3}
@@ -703,11 +716,11 @@ const PrakritiLanding = () => {
                     className="w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-green-400 placeholder:text-black"
                     value={form.message}
                     onChange={e => setForm(f => ({ ...f, message: e.target.value }))}
-                   
+
                     disabled={formLoading}
                   />
                 </div>
-                
+
                 <div className="flex items-start">
                   <input
                     type="checkbox"
@@ -719,16 +732,16 @@ const PrakritiLanding = () => {
                   />
                   <label htmlFor="consent-checkbox" className="text-sm text-gray-700">
                     Yes, I consent to the{' '}
-                    <Link 
-                      to="https://risingspaces.in/privacy-policy" 
+                    <Link
+                      to="https://risingspaces.in/privacy-policy"
                       className="text-[#00274d] hover:text-[#00444d] underline"
                     >
                       Privacy Policy
                     </Link>
                     {' '}and{' '}
-                    <a 
-                      href="https://risingspaces.in/terms-conditions" 
-                      target="_blank" 
+                    <a
+                      href="https://risingspaces.in/terms-conditions"
+                      target="_blank"
                       rel="noopener noreferrer"
                       className="text-[#00274d] hover:text-[#00444d] underline"
                     >
@@ -737,7 +750,7 @@ const PrakritiLanding = () => {
                     .
                   </label>
                 </div>
-                
+
                 <button
                   type="submit"
                   className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition-all disabled:opacity-50 disabled:cursor-not-allowed"
