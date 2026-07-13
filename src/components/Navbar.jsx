@@ -102,6 +102,7 @@ export default function Navbar() {
             <a href="#about" className="text-gray-700 hover:text-green-600 transition-colors">About</a>
             <a href="#amenities" className="text-gray-700 hover:text-green-600 transition-colors">Amenities</a>
             <a href="#gallery" className="text-gray-700 hover:text-green-600 transition-colors">Gallery</a>
+            <a href="#construction" className="text-gray-700 hover:text-green-600 transition-colors">Site Progress</a>
             <a href="#location" className="text-gray-700 hover:text-green-600 transition-colors">Location</a>
             {/* <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</a> */}
             {/* <Link to="/privacy-policy" className="text-gray-700 hover:text-green-600 transition-colors">Privacy Policy</Link> */}
@@ -134,6 +135,7 @@ export default function Navbar() {
             <a href="#about" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>About</a>
             <a href="#amenities" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Amenities</a>
             <a href="#gallery" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a>
+            <a href="#construction" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Site Progress</a>
             <a href="#location" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Location</a>
             {/* <a href="#contact" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Contact</a> */}
             {/* <Link to="/privacy-policy" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Privacy Policy</Link> */}

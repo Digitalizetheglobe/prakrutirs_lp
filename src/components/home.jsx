@@ -7,6 +7,7 @@ import AnimatedGallery from './animatedgallery';
 import Gallery from './gallery';
 import EnhancedLocation from './location';
 import SimpleFAQ from './faq';
+import ConstructionSection from './constructionsection';
 import bg from '../assets/01.png';
 import db from '../assets/prakruti_new.webp';
 import tb from '../assets/parkruti_new_tab.webp';
@@ -477,6 +478,8 @@ const PrakritiLanding = () => {
       <section >
         <Gallery />
       </section>
+
+      <ConstructionSection />
 
       <section id="location">
         <EnhancedLocation />
