@@ -9,9 +9,9 @@ import EnhancedLocation from './location';
 import SimpleFAQ from './faq';
 import ConstructionSection from './constructionsection';
 import bg from '../assets/01.png';
-import db from '../assets/prakruti_new.webp';
-import tb from '../assets/parkruti_new_tab.webp';
-import mb from '../assets/prakruti_new_mobile.webp';
+import db from '../assets/Prakriti_Digital Creatives-01.webp';
+import tb from '../assets/Prakriti_Digital Creatives-02.webp';
+import mb from '../assets/Prakriti_Digital Creatives-03.webp';
 import ContactSection from './contactsection';
 import logo from '../assets/1_Black.png'; // Update the path if your logo is different
 import logof from '../assets/1_White.png'; // Update the path if your logo is different
