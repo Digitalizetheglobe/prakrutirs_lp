@@ -1,8 +1,8 @@
-import { ArrowRight, Zap, Home, CreditCard } from "lucide-react";
+import { Zap, Home, CreditCard } from "lucide-react";
 
 export default function PricingSection() {
   return (
-    <section className="relative py-10 overflow-hidden">
+    <section className="relative py-16 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
         <div 
@@ -12,98 +12,64 @@ export default function PricingSection() {
           }}
         ></div>
         {/* Dark overlay for better text readability */}
-        <div className="absolute inset-0 bg-black/70"></div>
-        {/* Green overlay to match the nature theme */}
-        {/* <div className="absolute inset-0 bg-green-900/40"></div> */}
+        <div className="absolute inset-0 bg-black/75 backdrop-blur-[2px]"></div>
       </div>
       
       <div className="container mx-auto px-6 relative z-20">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center space-x-2 bg-green-600 text-white px-6 py-2 rounded-full text-sm font-semibold mb-6 shadow-lg">
-            <Zap className="w-4 h-4" />
+        <div className="text-center mb-14">
+          <div className="inline-flex items-center space-x-2 bg-green-600/90 text-white px-6 py-2 rounded-full text-sm font-semibold mb-6 shadow-lg backdrop-blur-md border border-green-400/30">
+            <Zap className="w-4 h-4 text-yellow-300" />
             <span>LIMITED TIME OFFER</span>
           </div>
-          <h2 className="text-5xl md:text-5xl font-black text-white mb-4 leading-tight drop-shadow-2xl">
-            Pre-Launch
-            <span className="block text-green-400">
+          <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight drop-shadow-2xl">
+            Pre-Launch{" "}
+            <span className="text-green-400 block md:inline">
               Special Pricing
             </span>
           </h2>
-          <p className="text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-lg">
+          <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-lg">
             Secure your dream property with our exclusive early-bird rates
           </p>
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid lg:grid-cols-3 gap-10 mb-20">
+        <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8 items-stretch mb-10">
           {/* Rate Card */}
-          <div className="group relative">
-            {/* <div className="absolute inset-0 rounded-3xl blur opacity-50 group-hover:opacity-75 transition duration-300"></div> */}
-            <div className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 hover:transform hover:scale-105 transition-all duration-300 shadow-2xl">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-green-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <Home className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">Per Sqft Rate</h3>
-                <div className="mb-6">
-                  <span className="text-5xl font-black text-green-300 drop-shadow-lg">₹1,499</span>
-                  <div className="text-gray-200 mt-2">per square foot</div>
-                </div>
-                <div className="h-1 bg-green-500 rounded-full"></div>
+          <div className="group relative flex flex-col justify-between bg-white/10 backdrop-blur-md border border-white/20 rounded-3xl p-8 hover:border-green-400/50 hover:bg-white/15 transition-all duration-300 shadow-2xl hover:scale-[1.02]">
+            <div className="text-center">
+              <div className="w-16 h-16 bg-green-500/90 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <Home className="w-8 h-8 text-white" />
               </div>
+              <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">Per Sqft Rate</h3>
+              <div className="mb-6">
+                <span className="text-5xl font-black text-green-300 drop-shadow-lg">₹1,699</span>
+                <div className="text-gray-200 mt-2 font-medium">per square foot</div>
+              </div>
+              <div className="h-1 bg-gradient-to-r from-transparent via-green-500 to-transparent rounded-full opacity-80"></div>
             </div>
           </div>
 
           {/* Budget Card - Featured */}
-          <div className="group relative transform lg:scale-110">
-            {/* <div className="absolute inset-0 bg-emerald-500 rounded-3xl blur opacity-75 group-hover:opacity-100 transition duration-300"></div> */}
-            <div className="relative bg-white/15 backdrop-blur-lg border-2 border-emerald-400/60 rounded-3xl p-8 hover:transform hover:scale-105 transition-all duration-300 shadow-2xl">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <div className="bg-emerald-500 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg">
-                  MOST POPULAR
-                </div>
-              </div>
-              <div className="text-center pt-4">
-                <div className="w-16 h-16 bg-emerald-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <CreditCard className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">Starting Budget</h3>
-                <div className="mb-6">
-                  <span className="text-5xl font-black text-emerald-300 drop-shadow-lg">15.38</span>
-                  <div className="text-gray-200 mt-2">Lacs onwards</div>
-                </div>
-                <div className="h-1 bg-emerald-500 rounded-full"></div>
+          <div className="group relative flex flex-col justify-between bg-white/15 backdrop-blur-md border-2 border-emerald-400/70 rounded-3xl p-8 hover:border-emerald-400 hover:bg-white/20 transition-all duration-300 shadow-2xl hover:scale-[1.02]">
+            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+              <div className="bg-emerald-500 text-white px-6 py-1.5 rounded-full text-xs md:text-sm font-bold shadow-lg uppercase tracking-wider">
+                MOST POPULAR
               </div>
             </div>
-          </div>
-
-          {/* Infrastructure Card */}
-          <div className="group relative">
-            {/* <div className="absolute inset-0 bg-teal-600 rounded-3xl blur opacity-50 group-hover:opacity-75 transition duration-300"></div> */}
-            <div className="relative bg-white/10 backdrop-blur-lg border border-white/20 rounded-3xl p-8 hover:transform hover:scale-105 transition-all duration-300 shadow-2xl">
-              <div className="text-center">
-                <div className="w-16 h-16 bg-teal-500 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <Zap className="w-8 h-8 text-white" />
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">Infrastructure</h3>
-                <div className="mb-6">
-                  <span className="text-5xl font-black text-teal-300 drop-shadow-lg">₹99K</span>
-                  <div className="text-gray-200 mt-2">One-time cost</div>
-                </div>
-                <div className="h-1 bg-teal-500 rounded-full"></div>
+            <div className="text-center pt-2">
+              <div className="w-16 h-16 bg-emerald-500/90 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300">
+                <CreditCard className="w-8 h-8 text-white" />
               </div>
+              <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">Starting Budget</h3>
+              <div className="mb-6">
+                <span className="text-5xl font-black text-emerald-300 drop-shadow-lg">₹19.50</span>
+                <div className="text-gray-200 mt-2 font-medium">Lakhs onwards</div>
+              </div>
+              <div className="h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent rounded-full opacity-80"></div>
             </div>
           </div>
         </div>
-
-        {/* CTA Button */}
-        {/* <div className="text-center mt-12">
-          <button className="group relative inline-flex items-center space-x-3 bg-green-500 text-white px-12 py-4 rounded-full text-lg font-bold hover:shadow-2xl hover:shadow-green-500/50 transform hover:scale-105 transition-all duration-300 shadow-xl hover:bg-green-600">
-            <span>Reserve Your Plot Today</span>
-            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-          </button>
-        </div> */}
       </div>
     </section>
   );

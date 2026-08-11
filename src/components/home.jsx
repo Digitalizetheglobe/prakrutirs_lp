@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { MapPin, Phone, Mail, TreePine, Shield, Droplets, Zap, Home, Car, Users, Star, ChevronDown, ChevronUp, Play, CheckCircle, ArrowRight, Instagram, Facebook, Twitter, TrendingUp, Leaf, Award, Clock, Trees } from 'lucide-react';
 import PricingSection from './pricingsection';
+import PlotLayout from './plotlayout';
 import AmenitiesSection from './amenitiessection';
 import AnimatedGallery from './animatedgallery';
 import Gallery from './gallery';
@@ -467,6 +468,7 @@ const PrakritiLanding = () => {
       </section>
 
       <PricingSection />
+      <PlotLayout />
       <section id="amenities">
         <AmenitiesSection />
       </section>

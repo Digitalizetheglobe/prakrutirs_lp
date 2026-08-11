@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { ZoomIn, ChevronLeft, ChevronRight, X, ChevronDown, ChevronUp, Calendar, MapPin } from 'lucide-react';
+import { ZoomIn, ChevronLeft, ChevronRight, X, ChevronDown, ChevronUp, MapPin, Image as ImageIcon, Video as VideoIcon } from 'lucide-react';
+import progressVideo from '../assets/VID-20260803-WA0022 (1).mp4';
 
 // Dynamically import all images from the newupload folder
 const imageModules = import.meta.glob('../assets/newupload/*.{png,jpg,jpeg,webp}', { eager: true });
@@ -10,6 +11,7 @@ const progressImages = Object.entries(imageModules)
   .map(([_, mod]: any) => mod.default);
 
 export default function ConstructionSection() {
+  const [activeTab, setActiveTab] = useState<'photos' | 'videos'>('photos');
   const [showAll, setShowAll] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -81,73 +83,131 @@ export default function ConstructionSection() {
 
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
-        <div className="text-center mb-16">
-          {/* <div className="inline-flex items-center space-x-2 bg-green-600/10 text-green-700 px-5 py-2 rounded-full text-sm font-semibold mb-6 border border-green-200/50 shadow-sm">
-            <Calendar className="w-4 h-4 text-green-600" />
-            <span>JULY 2026 UPDATE</span>
-          </div> */}
+        <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-black text-gray-900 mb-4 leading-tight">
             Site Development
             <span className="block text-green-700">Progress Gallery</span>
           </h2>
           <div className="w-24 h-1 bg-green-600 mx-auto mb-6 rounded-full" />
           <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Witness the rapid transformation of Prakriti. We are actively shaping the plots, preparing internal road networks, standardizing utility infrastructure, and rolling out landscape greens to fulfill your dream getaway.
+            Witness the rapid transformation of Prakriti. We are actively shaping the plots, preparing internal road networks, standardizing utility infrastructure, and rolling out landscape greens.
           </p>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
-          {visibleImages.map((imgUrl, index) => (
-            <div
-              key={index}
-              className="group relative overflow-hidden bg-white rounded-2xl border border-green-100 shadow-md hover:shadow-xl hover:border-green-300 transition-all duration-500 transform hover:-translate-y-1 cursor-pointer"
-              onClick={() => openLightbox(index)}
+        {/* 2 Tabs: Photos & Videos */}
+        <div className="flex justify-center mb-10">
+          <div className="inline-flex p-1.5 bg-gray-200/80 rounded-full border border-gray-300/60 shadow-inner">
+            <button
+              onClick={() => setActiveTab('photos')}
+              className={`flex items-center space-x-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 cursor-pointer ${
+                activeTab === 'photos'
+                  ? 'bg-green-700 text-white shadow-md'
+                  : 'text-gray-700 hover:text-green-800'
+              }`}
             >
-              {/* Image Container */}
-              <div className="relative overflow-hidden aspect-[4/3] bg-gray-100">
-                <img
-                  src={imgUrl}
-                  alt={`Prakriti Site Update ${index + 1}`}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  loading="lazy"
-                />
-                {/* Overlay on hover */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-between p-4">
-                  <div className="self-end bg-white/20 backdrop-blur-md text-white rounded-full p-2.5 shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-500">
-                    <ZoomIn className="w-5 h-5" />
-                  </div>
-                  <div className="text-white">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-green-300">Development Stage</p>
-                    <h4 className="text-sm font-bold">Prakriti Plot #{index + 1}</h4>
-                  </div>
-                </div>
-              </div>
-
-              {/* Bottom Info Bar */}
-              <div className="p-4 flex items-center justify-between bg-white">
-                <div className="flex items-center space-x-1.5 text-gray-500 text-xs">
-                  <MapPin className="w-3.5 h-3.5 text-green-600" />
-                  <span>Takve, Pune</span>
-                </div>
-                <span className="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-full border border-green-200/40">
-                  On-Site
-                </span>
-              </div>
-            </div>
-          ))}
+              <ImageIcon className="w-4 h-4" />
+              <span>Photos</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('videos')}
+              className={`flex items-center space-x-2 px-6 py-2.5 rounded-full font-bold text-sm transition-all duration-300 cursor-pointer ${
+                activeTab === 'videos'
+                  ? 'bg-green-700 text-white shadow-md'
+                  : 'text-gray-700 hover:text-green-800'
+              }`}
+            >
+              <VideoIcon className="w-4 h-4" />
+              <span>Videos</span>
+            </button>
+          </div>
         </div>
 
-        {/* Load More Button */}
-        {progressImages.length > 8 && (
-          <div className="text-center">
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="inline-flex items-center space-x-2 px-8 py-3.5 bg-green-700 hover:bg-green-800 text-white font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105"
-            >
-              <span>{showAll ? 'Show Less' : `View All ${progressImages.length} Updates`}</span>
-              {showAll ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-            </button>
+        {/* TAB 1: PHOTOS */}
+        {activeTab === 'photos' && (
+          <>
+            {/* Gallery Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-12">
+              {visibleImages.map((imgUrl, index) => (
+                <div
+                  key={index}
+                  className="group relative overflow-hidden bg-white rounded-2xl border border-green-100 shadow-md hover:shadow-xl hover:border-green-300 transition-all duration-500 transform hover:-translate-y-1 cursor-pointer"
+                  onClick={() => openLightbox(index)}
+                >
+                  {/* Image Container */}
+                  <div className="relative overflow-hidden aspect-[4/3] bg-gray-100">
+                    <img
+                      src={imgUrl}
+                      alt={`Prakriti Site Update ${index + 1}`}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                      loading="lazy"
+                    />
+                    {/* Overlay on hover */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-between p-4">
+                      <div className="self-end bg-white/20 backdrop-blur-md text-white rounded-full p-2.5 shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-500">
+                        <ZoomIn className="w-5 h-5" />
+                      </div>
+                      <div className="text-white">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-green-300">Development Stage</p>
+                        <h4 className="text-sm font-bold">Prakriti Plot #{index + 1}</h4>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Bottom Info Bar */}
+                  <div className="p-4 flex items-center justify-between bg-white">
+                    <div className="flex items-center space-x-1.5 text-gray-500 text-xs">
+                      <MapPin className="w-3.5 h-3.5 text-green-600" />
+                      <span>Takve, Pune</span>
+                    </div>
+                    <span className="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-full border border-green-200/40">
+                      On-Site
+                    </span>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Load More Button */}
+            {progressImages.length > 8 && (
+              <div className="text-center">
+                <button
+                  onClick={() => setShowAll(!showAll)}
+                  className="inline-flex items-center space-x-2 px-8 py-3.5 bg-green-700 hover:bg-green-800 text-white font-bold rounded-full transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 cursor-pointer"
+                >
+                  <span>{showAll ? 'Show Less' : `View All ${progressImages.length} Updates`}</span>
+                  {showAll ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                </button>
+              </div>
+            )}
+          </>
+        )}
+
+        {/* TAB 2: VIDEOS */}
+        {activeTab === 'videos' && (
+          <div className="max-w-4xl mx-auto">
+            <div className="bg-white rounded-3xl p-4 md:p-6 border border-green-100 shadow-xl overflow-hidden">
+              <div className="relative aspect-video rounded-2xl overflow-hidden bg-black shadow-inner">
+                <video
+                  src={progressVideo}
+                  controls
+                  controlsList="nodownload"
+                  className="w-full h-full object-contain"
+                  preload="metadata"
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div className="p-4 mt-2 flex flex-col md:flex-row items-start md:items-center justify-between gap-3 border-t border-gray-100">
+                <div>
+                  <h4 className="text-lg font-bold text-gray-900">Site Development Video Tour</h4>
+                  <p className="text-sm text-gray-500">Real-time video footage of ground progress & layout development</p>
+                </div>
+                <div className="flex items-center space-x-1.5 text-xs text-green-700 bg-green-50 px-3.5 py-1.5 rounded-full border border-green-200 font-medium">
+                  <MapPin className="w-3.5 h-3.5" />
+                  <span>Prakriti Site, Pune</span>
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
@@ -160,7 +220,7 @@ export default function ConstructionSection() {
         >
           {/* Close button */}
           <button
-            className="absolute top-5 right-5 z-[100000] text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors"
+            className="absolute top-5 right-5 z-[100000] text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors cursor-pointer"
             onClick={closeLightbox}
             aria-label="Close Lightbox"
           >
@@ -169,7 +229,7 @@ export default function ConstructionSection() {
 
           {/* Left Arrow */}
           <button
-            className="absolute left-4 md:left-8 z-[100000] text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors"
+            className="absolute left-4 md:left-8 z-[100000] text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               prevImage();
@@ -201,7 +261,7 @@ export default function ConstructionSection() {
 
           {/* Right Arrow */}
           <button
-            className="absolute right-4 md:right-8 z-[100000] text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors"
+            className="absolute right-4 md:right-8 z-[100000] text-white/80 hover:text-white bg-white/10 hover:bg-white/20 p-3 rounded-full transition-colors cursor-pointer"
             onClick={(e) => {
               e.stopPropagation();
               nextImage();

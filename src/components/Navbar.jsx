@@ -100,12 +100,11 @@ export default function Navbar() {
           {/* Desktop Links */}
           <div className="hidden md:flex space-x-6">
             <a href="#about" className="text-gray-700 hover:text-green-600 transition-colors">About</a>
+            <a href="#layout" className="text-gray-700 hover:text-green-600 transition-colors">Plot Layout</a>
             <a href="#amenities" className="text-gray-700 hover:text-green-600 transition-colors">Amenities</a>
             <a href="#gallery" className="text-gray-700 hover:text-green-600 transition-colors">Gallery</a>
             <a href="#construction" className="text-gray-700 hover:text-green-600 transition-colors">Site Progress</a>
             <a href="#location" className="text-gray-700 hover:text-green-600 transition-colors">Location</a>
-            {/* <a href="#contact" className="text-gray-700 hover:text-green-600 transition-colors">Contact</a> */}
-            {/* <Link to="/privacy-policy" className="text-gray-700 hover:text-green-600 transition-colors">Privacy Policy</Link> */}
           </div>
 
           {/* Enquire Button (Hidden on Mobile) */}
@@ -133,6 +132,7 @@ export default function Navbar() {
         {isMobileMenuOpen && (
           <div className="md:hidden bg-white/95 shadow-md px-4 py-4 space-y-4 transition-all">
             <a href="#about" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>About</a>
+            <a href="#layout" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Plot Layout</a>
             <a href="#amenities" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Amenities</a>
             <a href="#gallery" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a>
             <a href="#construction" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Site Progress</a>
