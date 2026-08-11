@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Menu, X } from 'lucide-react';
 import logo from '../assets/1_Black.png'; // update path to your logo
 
 export default function Navbar() {
@@ -86,30 +86,30 @@ export default function Navbar() {
   return (
     <>
       {/* NAVBAR */}
-      <nav className="fixed top-0 w-full bg-white/90 backdrop-blur-md z-[999] shadow-lg">
-        <div className="container mx-auto px-4  flex items-center justify-between">
-          <div className="flex items-center">
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-md z-[999] shadow-md">
+        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+          <div className="flex items-center shrink-0">
             <img
               src={logo}
               alt="Prakriti Logo"
-              className="h-14 w-auto md:h-20 object-contain"
-              style={{ maxWidth: '140px' }}
+              className="h-10 md:h-12 lg:h-16 w-auto object-contain"
+              style={{ maxWidth: '130px' }}
             />
           </div>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex space-x-6">
-            <a href="#about" className="text-gray-700 hover:text-green-600 transition-colors">About</a>
-            <a href="#layout" className="text-gray-700 hover:text-green-600 transition-colors">Plot Layout</a>
-            <a href="#amenities" className="text-gray-700 hover:text-green-600 transition-colors">Amenities</a>
-            <a href="#gallery" className="text-gray-700 hover:text-green-600 transition-colors">Gallery</a>
-            <a href="#construction" className="text-gray-700 hover:text-green-600 transition-colors">Site Progress</a>
-            <a href="#location" className="text-gray-700 hover:text-green-600 transition-colors">Location</a>
+          {/* Desktop & Tablet Links */}
+          <div className="hidden md:flex items-center space-x-2 md:space-x-3 lg:space-x-6 text-xs md:text-sm lg:text-base font-medium whitespace-nowrap">
+            <a href="#about" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">About</a>
+            <a href="#layout" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">Plot Layout</a>
+            <a href="#amenities" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">Amenities</a>
+            <a href="#gallery" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">Gallery</a>
+            <a href="#construction" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">Site Progress</a>
+            <a href="#location" className="text-gray-700 hover:text-green-600 transition-colors whitespace-nowrap">Location</a>
           </div>
 
-          {/* Enquire Button (Hidden on Mobile) */}
+          {/* Enquire Button (Desktop & Tablet) */}
           <a
-            className="hidden md:inline-block text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
+            className="hidden md:inline-flex items-center justify-center text-white px-3 md:px-4 lg:px-6 py-1.5 md:py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-xs md:text-sm lg:text-base font-semibold cursor-pointer whitespace-nowrap shrink-0"
             style={{ backgroundColor: '#004d1f' }}
             onClick={() => setIsModalOpen(true)}
             role="button"
@@ -118,41 +118,49 @@ export default function Navbar() {
             Enquire Now!
           </a>
 
-          {/* Hamburger Menu Icon */}
-          <button
-            className="md:hidden text-gray-800 text-3xl ml-4 focus:outline-none"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            aria-label="Toggle menu"
-          >
-            ☰
-          </button>
+          {/* Mobile Controls */}
+          <div className="flex items-center space-x-2 md:hidden">
+            <a
+              className="text-white px-3 py-1.5 rounded-full text-xs font-semibold shadow-sm transition-all cursor-pointer whitespace-nowrap"
+              style={{ backgroundColor: '#004d1f' }}
+              onClick={() => setIsModalOpen(true)}
+              role="button"
+              tabIndex={0}
+            >
+              Enquire Now!
+            </a>
+            <button
+              className="text-gray-800 p-1.5 focus:outline-none rounded-lg hover:bg-gray-100 transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6 text-gray-800" /> : <Menu className="w-6 h-6 text-gray-800" />}
+            </button>
+          </div>
         </div>
 
-        {/* Mobile Menu */}
+        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white/95 shadow-md px-4 py-4 space-y-4 transition-all">
-            <a href="#about" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>About</a>
-            <a href="#layout" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Plot Layout</a>
-            <a href="#amenities" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Amenities</a>
-            <a href="#gallery" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a>
-            <a href="#construction" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Site Progress</a>
-            <a href="#location" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Location</a>
-            {/* <a href="#contact" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Contact</a> */}
-            {/* <Link to="/privacy-policy" className="block text-gray-700 hover:text-green-600" onClick={() => setIsMobileMenuOpen(false)}>Privacy Policy</Link> */}
-             <a
-            className="text-white px-6 py-2 rounded-full hover:shadow-lg transform hover:scale-105 transition-all text-sm md:text-base cursor-pointer"
-            style={{ backgroundColor: '#004d1f' }}
-            onClick={() => {
-              setIsModalOpen(true);
-              setIsMobileMenuOpen(false);
-            }}
-            role="button"
-            tabIndex={0}
-          >
-            Enquire Now!
-          </a>
+          <div className="md:hidden bg-white/95 backdrop-blur-lg shadow-2xl border-t border-gray-100 px-6 py-5 space-y-3.5 transition-all">
+            <a href="#about" className="block text-gray-800 font-medium hover:text-green-600 border-b border-gray-100 pb-2 transition-colors text-sm" onClick={() => setIsMobileMenuOpen(false)}>About</a>
+            <a href="#layout" className="block text-gray-800 font-medium hover:text-green-600 border-b border-gray-100 pb-2 transition-colors text-sm" onClick={() => setIsMobileMenuOpen(false)}>Plot Layout</a>
+            <a href="#amenities" className="block text-gray-800 font-medium hover:text-green-600 border-b border-gray-100 pb-2 transition-colors text-sm" onClick={() => setIsMobileMenuOpen(false)}>Amenities</a>
+            <a href="#gallery" className="block text-gray-800 font-medium hover:text-green-600 border-b border-gray-100 pb-2 transition-colors text-sm" onClick={() => setIsMobileMenuOpen(false)}>Gallery</a>
+            <a href="#construction" className="block text-gray-800 font-medium hover:text-green-600 border-b border-gray-100 pb-2 transition-colors text-sm" onClick={() => setIsMobileMenuOpen(false)}>Site Progress</a>
+            <a href="#location" className="block text-gray-800 font-medium hover:text-green-600 border-b border-gray-100 pb-2 transition-colors text-sm" onClick={() => setIsMobileMenuOpen(false)}>Location</a>
+            <a
+              className="w-full text-center block text-white font-semibold py-2.5 rounded-full shadow-md transition-all cursor-pointer text-sm mt-2"
+              style={{ backgroundColor: '#004d1f' }}
+              onClick={() => {
+                setIsModalOpen(true);
+                setIsMobileMenuOpen(false);
+              }}
+              role="button"
+              tabIndex={0}
+            >
+              Enquire Now!
+            </a>
           </div>
-          
         )}
       </nav>
 

@@ -10,9 +10,9 @@ import EnhancedLocation from './location';
 import SimpleFAQ from './faq';
 import ConstructionSection from './constructionsection';
 import bg from '../assets/01.png';
-import db from '../assets/Prakriti_Digital Creatives-01.webp';
-import tb from '../assets/Prakriti_Digital Creatives-02.webp';
-import mb from '../assets/Prakriti_Digital Creatives-03.webp';
+import db from '../assets/Prakriti_Web Banner-01.webp';
+import tb from '../assets/Prakriti_Web Banner-02.webp';
+import mb from '../assets/Prakriti_Web Banner-03.webp';
 import ContactSection from './contactsection';
 import logo from '../assets/1_Black.png'; // Update the path if your logo is different
 import logof from '../assets/1_White.png'; // Update the path if your logo is different
@@ -256,7 +256,7 @@ const PrakritiLanding = () => {
       <PrivacyConsentBanner />
 
       {/* New Hero Section */}
-      <section id="hero" className="w-full mt-[50px] md:mt-[80px]">
+      <section id="hero" className="w-full mt-[56px] sm:mt-[60px] md:mt-[72px] lg:mt-[80px]">
         {/* Desktop Banner */}
         <img src={db} alt="Desktop Banner" className="hidden lg:block w-full h-auto object-cover" />
         {/* Tablet Banner */}
