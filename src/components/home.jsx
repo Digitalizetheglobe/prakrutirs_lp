@@ -99,7 +99,7 @@ const PrakritiLanding = () => {
     {
       icon: <Home size={16} />,
       label: "Plot Sizes",
-      value: "861-2275 sq ft"
+      value: "1000-2275 sq ft"
     },
     {
       icon: <MapPin size={16} />,
@@ -162,7 +162,7 @@ const PrakritiLanding = () => {
 
   const faqs = [
     { q: "What is the total project area?", a: "The project spans across 5 acres with 81 premium NA plots." },
-    { q: "What are the available plot sizes?", a: "Plot sizes range from 861 to 2275 sqft net area to suit different needs." },
+    { q: "What are the available plot sizes?", a: "Plot sizes range from 1000 to 2275 sqft net area to suit different needs." },
     { q: "What is the booking process?", a: "₹1 Lac booking amount, 20% within 15 days, and 70% bank loan available." },
     { q: "What approvals does the project have?", a: "The project is sanctioned by PMRDA with all necessary approvals." },
     { q: "What is the maintenance cost?", a: "Very affordable at ₹1 per sqft per month." }

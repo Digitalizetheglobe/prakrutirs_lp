@@ -115,7 +115,7 @@ const ContactSection = () => {
   ];
 
   const plotSizes = [
-    { value: "861", label: "861 sqft - Compact Living" },
+    { value: "1000", label: "1000 sqft - Compact Living" },
     { value: "1200", label: "1200 sqft - Modern Comfort" },
     { value: "1500", label: "1500 sqft - Spacious Home" },
     { value: "2000", label: "2000 sqft - Premium Space" },
