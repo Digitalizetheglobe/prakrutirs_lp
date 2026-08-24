@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { CheckCircle, Menu, X } from 'lucide-react';
 import logo from '../assets/1_Black.png'; // update path to your logo
+import { submitLead } from '../services/leadService';
 
 export default function Navbar() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -36,33 +37,13 @@ export default function Navbar() {
     setFormError('');
 
     try {
-      // Prepare form data for API with data wrapper
-      const requestBody = {
-        data: {
-          full_name: form.name,
-          mobile_number: form.number,
-          email_address: form.email,
-          property_type: "NA Plot",
-          location: "Prakriti - Near Takve, Pune",
-          message: form.message,
-        },
-      };
-
-      // Send form data to API
-      const response = await fetch('https://api.risingspaces.in/api/forms/forms/6a158501fbaedc3f5f68b738/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
+      await submitLead({
+        name: form.name,
+        phone: form.number,
+        email: form.email,
+        message: form.message,
+        formSource: 'Navbar Modal Enquiry',
       });
-
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.status} ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      console.log('Form submitted successfully:', result);
 
       setFormSuccess(true);
       

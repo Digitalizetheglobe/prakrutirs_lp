@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Phone, MapPin, Users, Send, Star, Zap, Clock, CheckCircle } from 'lucide-react';
 import { link } from 'framer-motion/client';
 
+import { submitLead } from '../services/leadService';
+
 const ContactSection = () => {
   const [isVisible, setIsVisible] = useState({ contact: false });
   const [formData, setFormData] = useState({
@@ -23,14 +25,14 @@ const ContactSection = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value
     });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     // Validate required fields: name, phone
@@ -40,33 +42,14 @@ const ContactSection = () => {
     setFormError('');
 
     try {
-      // Prepare form data for API with data wrapper
-      const requestBody = {
-        data: {
-          full_name: formData.name,
-          mobile_number: formData.phone,
-          email_address: formData.email || '',
-          property_type: formData.plotSize ? `${formData.plotSize} sqft Plot` : "NA Plot",
-          location: "Prakriti - Near Takve, Pune",
-          message: formData.message || '',
-        },
-      };
-
-      // Send form data to API
-      const response = await fetch('https://api.risingspaces.in/api/forms/forms/6a158501fbaedc3f5f68b738/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
+      await submitLead({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        plotSize: formData.plotSize,
+        message: formData.message,
+        formSource: 'Contact Section Inquiry',
       });
-
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.status} ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      console.log('Form submitted successfully:', result);
 
       setFormSuccess(true);
 

@@ -18,6 +18,7 @@ import logo from '../assets/1_Black.png'; // Update the path if your logo is dif
 import logof from '../assets/1_White.png'; // Update the path if your logo is different
 import Navbar from './Navbar';
 import PrivacyConsentBanner from './PrivacyConsentBanner';
+import { submitLead } from '../services/leadService';
 
 const PrakritiLanding = () => {
   const [isVisible, setIsVisible] = useState({});
@@ -191,33 +192,13 @@ const PrakritiLanding = () => {
     setFormError('');
 
     try {
-      // Prepare form data for API with data wrapper
-      const requestBody = {
-        data: {
-          full_name: form.name,
-          mobile_number: form.number,
-          email_address: form.email,
-          property_type: "NA Plot",
-          location: "Prakriti - Near Takve, Pune",
-          message: form.message,
-        },
-      };
-
-      // Send form data to API
-      const response = await fetch('https://api.risingspaces.in/api/forms/forms/6a158501fbaedc3f5f68b738/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(requestBody),
+      await submitLead({
+        name: form.name,
+        phone: form.number,
+        email: form.email,
+        message: form.message,
+        formSource: 'Home Hero / Popup Modal Enquiry',
       });
-
-      if (!response.ok) {
-        throw new Error(`API Error: ${response.status} ${response.statusText}`);
-      }
-
-      const result = await response.json();
-      console.log('Form submitted successfully:', result);
 
       setFormSuccess(true);
 
