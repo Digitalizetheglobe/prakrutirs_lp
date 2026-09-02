@@ -17,6 +17,7 @@ import ContactSection from './contactsection';
 import logo from '../assets/1_Black.png'; // Update the path if your logo is different
 import logof from '../assets/1_White.png'; // Update the path if your logo is different
 import Navbar from './Navbar';
+import LandingBanner from './LandingBanner';
 import PrivacyConsentBanner from './PrivacyConsentBanner';
 import { submitLead } from '../services/leadService';
 
@@ -236,14 +237,9 @@ const PrakritiLanding = () => {
       {/* Privacy Consent Banner */}
       <PrivacyConsentBanner />
 
-      {/* New Hero Section */}
+      {/* Hero Section with Dynamic Banner */}
       <section id="hero" className="w-full mt-[56px] sm:mt-[60px] md:mt-[72px] lg:mt-[80px]">
-        {/* Desktop Banner */}
-        <img src={db} alt="Desktop Banner" className="hidden lg:block w-full h-auto object-cover" />
-        {/* Tablet Banner */}
-        <img src={tb} alt="Tablet Banner" className="hidden md:block lg:hidden w-full h-auto object-cover" />
-        {/* Mobile Banner */}
-        <img src={mb} alt="Mobile Banner" className="block md:hidden w-full h-auto object-cover" />
+        <LandingBanner />
       </section>
 
       {/* Hero Section - Clean, No Background Animation */}
