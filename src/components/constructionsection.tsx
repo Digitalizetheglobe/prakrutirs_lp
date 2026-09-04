@@ -5,8 +5,16 @@ import progressVideo from '../assets/VID-20260803-WA0022 (1).mp4';
 // Dynamically import all images from the newupload folder
 const imageModules = import.meta.glob('../assets/newupload/*.{png,jpg,jpeg,webp}', { eager: true });
 
-// Sort by filename keys to keep a consistent display order
+// Excluded images list (landscape / non-construction photos)
+const excludedImages = [
+  'WhatsApp Image 2026-07-11 at 1.17.42 PM.jpeg',
+  'WhatsApp Image 2026-07-11 at 1.17.44 PM.jpeg',
+  'WhatsApp Image 2026-07-11 at 1.17.46 PM (1).jpeg',
+];
+
+// Sort by filename keys to keep a consistent display order and exclude unwanted images
 const progressImages = Object.entries(imageModules)
+  .filter(([path]) => !excludedImages.some((excluded) => path.includes(excluded)))
   .sort(([pathA], [pathB]) => pathA.localeCompare(pathB))
   .map(([_, mod]: any) => mod.default);
 
@@ -130,38 +138,20 @@ export default function ConstructionSection() {
               {visibleImages.map((imgUrl, index) => (
                 <div
                   key={index}
-                  className="group relative overflow-hidden bg-white rounded-2xl border border-green-100 shadow-md hover:shadow-xl hover:border-green-300 transition-all duration-500 transform hover:-translate-y-1 cursor-pointer"
+                  className="group relative overflow-hidden bg-gray-100 rounded-2xl border border-green-100/80 shadow-md hover:shadow-xl hover:border-green-300 transition-all duration-500 transform hover:-translate-y-1 cursor-pointer aspect-[4/3]"
                   onClick={() => openLightbox(index)}
                 >
-                  {/* Image Container */}
-                  <div className="relative overflow-hidden aspect-[4/3] bg-gray-100">
-                    <img
-                      src={imgUrl}
-                      alt={`Prakriti Site Update ${index + 1}`}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                      loading="lazy"
-                    />
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-between p-4">
-                      <div className="self-end bg-white/20 backdrop-blur-md text-white rounded-full p-2.5 shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-500">
-                        <ZoomIn className="w-5 h-5" />
-                      </div>
-                      <div className="text-white">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-green-300">Development Stage</p>
-                        <h4 className="text-sm font-bold">Prakriti Plot #{index + 1}</h4>
-                      </div>
+                  <img
+                    src={imgUrl}
+                    alt={`Prakriti Site Update ${index + 1}`}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                    loading="lazy"
+                  />
+                  {/* Overlay on hover */}
+                  <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                    <div className="bg-white/25 backdrop-blur-md text-white rounded-full p-3 shadow-lg transform scale-90 group-hover:scale-100 transition-transform duration-300">
+                      <ZoomIn className="w-6 h-6" />
                     </div>
-                  </div>
-
-                  {/* Bottom Info Bar */}
-                  <div className="p-4 flex items-center justify-between bg-white">
-                    <div className="flex items-center space-x-1.5 text-gray-500 text-xs">
-                      <MapPin className="w-3.5 h-3.5 text-green-600" />
-                      <span>Takve, Pune</span>
-                    </div>
-                    <span className="text-[10px] font-bold text-green-700 bg-green-50 px-2 py-0.5 rounded-full border border-green-200/40">
-                      On-Site
-                    </span>
                   </div>
                 </div>
               ))}
