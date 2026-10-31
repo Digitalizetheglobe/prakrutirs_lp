@@ -5,7 +5,7 @@ export default function PricingSection() {
     <section className="relative py-16 overflow-hidden">
       {/* Background Image with Overlay */}
       <div className="absolute inset-0">
-        <div 
+        <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
           style={{
             backgroundImage: "url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80')"
@@ -14,7 +14,7 @@ export default function PricingSection() {
         {/* Dark overlay for better text readability */}
         <div className="absolute inset-0 bg-black/75 backdrop-blur-[2px]"></div>
       </div>
-      
+
       <div className="container mx-auto px-6 relative z-20">
         {/* Header */}
         <div className="text-center mb-14">
@@ -23,13 +23,16 @@ export default function PricingSection() {
             <span>LIMITED TIME OFFER</span>
           </div>
           <h2 className="text-4xl md:text-5xl font-black text-white mb-4 leading-tight drop-shadow-2xl">
-            Pre-Launch{" "}
+            A Festive Celebration{" "}
             <span className="text-green-400 block md:inline">
-              Special Pricing
+              of Exclusive Offers
             </span>
           </h2>
-          <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-lg">
+          {/* <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-lg">
             Secure your dream property with our exclusive early-bird rates
+          </p> */}
+          <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto drop-shadow-lg">
+            Enjoy exclusive benefits with <span className="text-green-400 font-bold">Stamp Duty & Registration Off.</span>
           </p>
         </div>
 
@@ -63,7 +66,7 @@ export default function PricingSection() {
               </div>
               <h3 className="text-2xl font-bold text-white mb-2 drop-shadow-md">Starting Budget</h3>
               <div className="mb-6">
-                <span className="text-5xl font-black text-emerald-300 drop-shadow-lg">₹19.50</span>
+                <span className="text-5xl font-black text-emerald-300 drop-shadow-lg">₹20</span>
                 <div className="text-gray-200 mt-2 font-medium">Lakhs onwards</div>
               </div>
               <div className="h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent rounded-full opacity-80"></div>

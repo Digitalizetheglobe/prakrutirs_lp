@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { ZoomIn, X } from 'lucide-react';
-import plotLayoutImg from '../assets/IMG-20260710-WA0008.jpg.jpeg';
+import plotLayoutImg from '../assets/plot/new_plot_img.jpeg';
 
 export default function PlotLayout() {
   const [isModalOpen, setIsModalOpen] = useState(false);
